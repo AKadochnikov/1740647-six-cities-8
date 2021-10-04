@@ -10,9 +10,6 @@ const MainSetting = {
   SPAN_WIDTH_80: {
     width: '80%'
   },
-  SPAN_WIDTH_100: {
-    width: '100%'
-  },
 }
 
 ReactDOM.render(
@@ -20,7 +17,6 @@ ReactDOM.render(
     <App displayStyle={MainSetting.DISPLAY_STYLE}
          tabIndex={MainSetting.TAB_INDEX}
          spanWidth80={MainSetting.SPAN_WIDTH_80}
-         spanWidth100={MainSetting.SPAN_WIDTH_100}
     />
   </React.StrictMode>,
   document.getElementById('root'));

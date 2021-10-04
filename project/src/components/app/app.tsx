@@ -5,14 +5,12 @@ type AppProps = {
   displayStyle: CSSProperties;
   tabIndex: number;
   spanWidth80: CSSProperties;
-  spanWidth100: CSSProperties;
 }
 
-function App ({displayStyle, tabIndex, spanWidth80, spanWidth100}: AppProps): JSX.Element {
+function App ({displayStyle, tabIndex, spanWidth80}: AppProps): JSX.Element {
   return  (<Main displayStyle={displayStyle}
                  tabIndex={tabIndex}
                  spanWidth80={spanWidth80}
-                 spanWidth100={spanWidth100}
   />);
 }
 
