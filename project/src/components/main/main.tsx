@@ -4,6 +4,7 @@ type MainProps = {
   displayStyle: CSSProperties;
   tabIndex: number;
   spanWidth80: CSSProperties;
+  countStay: number;
 }
 
 function PlaceCard ({spanWidth80}: MainProps): JSX.Element {
@@ -44,7 +45,7 @@ function PlaceCard ({spanWidth80}: MainProps): JSX.Element {
   </article>);
 }
 
-function Main ({displayStyle, tabIndex, spanWidth80}: MainProps): JSX.Element {
+function Main ({displayStyle, tabIndex, spanWidth80, countStay}: MainProps): JSX.Element {
   return (<>
     <div style={displayStyle}>
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +133,7 @@ function Main ({displayStyle, tabIndex, spanWidth80}: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{countStay} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={tabIndex}>
@@ -149,11 +150,11 @@ function Main ({displayStyle, tabIndex, spanWidth80}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80}/>
-                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80}/>
-                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80}/>
-                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80}/>
-                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80}/>
+                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80} countStay={countStay}/>
+                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80} countStay={countStay}/>
+                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80} countStay={countStay}/>
+                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80} countStay={countStay}/>
+                <PlaceCard displayStyle={displayStyle} tabIndex={tabIndex} spanWidth80={spanWidth80} countStay={countStay}/>
               </div>
             </section>
             <div className="cities__right-section">
