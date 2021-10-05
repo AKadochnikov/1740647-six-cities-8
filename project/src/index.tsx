@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
 const MainSetting = {
-    COUNT_STAY: 300,
-}
+  COUNT_STAY: 300,
+};
 
 ReactDOM.render(
   <React.StrictMode>
