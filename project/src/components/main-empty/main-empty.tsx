@@ -1,12 +1,6 @@
-import {CSSProperties} from "react";
-
-type MainEmptyProps = {
-  displayStyle: CSSProperties;
-}
-
-function MainEmpty ({displayStyle}: MainEmptyProps): JSX.Element {
+function MainEmpty (): JSX.Element {
   return (<>
-    <div style={displayStyle}>
+    <div style={{display: 'none'}}>
       <svg xmlns="http://www.w3.org/2000/svg">
         <symbol id="icon-arrow-select" viewBox="0 0 7 4">
           <path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"/>
