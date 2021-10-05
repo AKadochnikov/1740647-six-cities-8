@@ -8,6 +8,6 @@ const MainSetting = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App count_stay={MainSetting.COUNT_STAY}/>
+    <App countStay={MainSetting.COUNT_STAY}/>
   </React.StrictMode>,
   document.getElementById('root'));

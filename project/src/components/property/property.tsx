@@ -137,10 +137,10 @@ function Property (): JSX.Element {
                   </div>
                   <span className="property__user-name">
                   Angelina
-                </span>
+                  </span>
                   <span className="property__user-status">
                   Pro
-                </span>
+                  </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -161,7 +161,7 @@ function Property (): JSX.Element {
                       </div>
                       <span className="reviews__user-name">
                       Max
-                    </span>
+                      </span>
                     </div>
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
@@ -211,7 +211,7 @@ function Property (): JSX.Element {
                       </svg>
                     </label>
                   </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={""} />
+                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} />
                   <div className="reviews__button-wrapper">
                     <p className="reviews__help">
                       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.

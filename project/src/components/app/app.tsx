@@ -1,11 +1,11 @@
-import Main from "../main/main";
+import Main from '../main/main';
 
 type AppProps = {
-  count_stay: number;
+  countStay: number;
 }
 
-function App ({count_stay}: AppProps): JSX.Element {
-  return  (<Main countStay={count_stay}/>);
+function App ({countStay}: AppProps): JSX.Element {
+  return  (<Main countStay={countStay}/>);
 }
 
 export default App;
