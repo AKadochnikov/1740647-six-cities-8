@@ -1,11 +1,12 @@
-import PlaceCard from '../place-card/place-card';
 import Logo from '../logo/logo';
+import {offersMocks} from '../../mocks/mock-types';
+import CardList from '../card-list/card-list';
 
 type MainProps = {
-  countStay: number;
+  offers: offersMocks[];
 }
 
-function Main ({countStay}: MainProps): JSX.Element {
+function Main ({ offers }: MainProps): JSX.Element {
   return (
     <>
       <div style={{display: 'none'}}>
@@ -93,7 +94,7 @@ function Main ({countStay}: MainProps): JSX.Element {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{countStay} places to stay in Amsterdam</b>
+                <b className="places__found">{offers.length} places to stay in Amsterdam</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -110,11 +111,9 @@ function Main ({countStay}: MainProps): JSX.Element {
                   </ul>
                 </form>
                 <div className="cities__places-list places__list tabs__content">
-                  <PlaceCard />
-                  <PlaceCard />
-                  <PlaceCard />
-                  <PlaceCard />
-                  <PlaceCard />
+                  <CardList
+                    offers={offers}
+                  />
                 </div>
               </section>
               <div className="cities__right-section">
