@@ -54,7 +54,7 @@ const offers: offersMocks[]  = [{
   },
   id: 2,
   images: ['img/1.png', 'img/2.png'],
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   location: {
     latitude: 52.35514938496378,

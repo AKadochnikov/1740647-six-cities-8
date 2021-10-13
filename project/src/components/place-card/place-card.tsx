@@ -1,18 +1,12 @@
 import {offersMocks} from '../../mocks/mock-types';
+import {getRating, ucFirst} from '../../const';
 
 type placeCardProps = {
   offer: offersMocks;
 }
 
-const ucFirst = (str: string): string => {
-  if (!str){
-    return str;
-  }
-  return str[0].toUpperCase() + str.slice(1);
-};
-
 function PlaceCard ({offer}: placeCardProps): JSX.Element {
-  const {isPremium, previewImage, price, rating, title, type} = offer;
+  const {isPremium, previewImage, price, rating, title, type, isFavorite} = offer;
   return (
     <article className="cities__place-card place-card">
       {isPremium ? <div className="place-card__mark"> <span>Premium</span> </div> : ''}
@@ -27,7 +21,7 @@ function PlaceCard ({offer}: placeCardProps): JSX.Element {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button className={isFavorite? 'place-card__bookmark-button place-card__bookmark-button--active button': 'place-card__bookmark-button button'} type="button">
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -36,8 +30,8 @@ function PlaceCard ({offer}: placeCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '50%'}} />
-            <span className="visually-hidden">{rating}</span>
+            <span style={{width: `${getRating(rating)}%`}} />
+            <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">

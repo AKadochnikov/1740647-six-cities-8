@@ -1,8 +1,15 @@
 import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
+import {offersMocks} from '../../mocks/mock-types';
 
-function Favorites():JSX.Element {
+type favoritesProps = {
+  offers: offersMocks[];
+}
+
+function Favorites({offers}: favoritesProps):JSX.Element {
+  const Cities: Set<string> = new Set();
+  offers.slice().filter((offer) => offer.isFavorite).forEach((offer) => Cities.add(offer.city.name));
   return (
     <div>
       <div style={{display: 'none'}}>
@@ -39,7 +46,14 @@ function Favorites():JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <FavoritesList />
+                {[...Cities].map((city) => (
+                  <FavoritesList
+                    key={`${city}_1`}
+                    offers={offers}
+                    city={city}
+                  />
+                ))}
+
               </ul>
             </section>
           </div>
