@@ -1,7 +1,6 @@
 import {offersMocks} from '../../mocks/mock-types';
 import {getRating, ucFirst} from '../../const';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {useHistory} from 'react-router-dom';
 
 type placeCardProps = {
   offer: offersMocks;
@@ -10,6 +9,7 @@ type placeCardProps = {
 
 function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
   const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offer;
+  const history = useHistory();
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={() => setActive(id)}
@@ -17,9 +17,9 @@ function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
     >
       {isPremium ? <div className="place-card__mark"> <span>Premium</span> </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.Room}>
+        <a onClick={()=>history.push(`/offer/${id}`)}>
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
-        </Link>
+        </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -41,7 +41,7 @@ function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{title}</Link>
+          <a onClick={()=>history.push(`/offer/${id}`)}>{title}</a>
         </h2>
         <p className="place-card__type">{ucFirst(type)}</p>
       </div>

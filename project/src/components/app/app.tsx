@@ -38,7 +38,9 @@ function App ({offers}: AppProps): JSX.Element {
         </PrivateRoute>
 
         <Route exact path={AppRoute.Room}>
-          <Property />
+          <Property
+            offers={offers}
+          />
         </Route>
 
         <Route>
