@@ -1,6 +1,8 @@
 import Logo from '../logo/logo';
 import {offersMocks} from '../../mocks/mock-types';
 import CardList from '../card-list/card-list';
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 type MainProps = {
   offers: offersMocks[];
@@ -36,16 +38,16 @@ function Main ({ offers }: MainProps): JSX.Element {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href="#">
+                    <Link className="header__nav-link" to={AppRoute.SignIn}>
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -58,19 +60,19 @@ function Main ({ offers }: MainProps): JSX.Element {
             <section className="locations container">
               <ul className="locations__list tabs__list">
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                     <span>Paris</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                     <span>Cologne</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                     <span>Brussels</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="locations__item">
                   <a className="locations__item-link tabs__item tabs__item--active">
@@ -78,14 +80,14 @@ function Main ({ offers }: MainProps): JSX.Element {
                   </a>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                     <span>Hamburg</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
+                  <Link className="locations__item-link tabs__item" to={AppRoute.Main}>
                     <span>Dusseldorf</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </section>

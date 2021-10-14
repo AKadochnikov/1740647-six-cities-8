@@ -1,4 +1,6 @@
 import Logo from '../logo/logo';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 function Property (): JSX.Element {
   return (
@@ -16,16 +18,16 @@ function Property (): JSX.Element {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    </Link>
                   </li>
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href="#">
+                    <Link className="header__nav-link" to={AppRoute.Main}>
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -230,9 +232,9 @@ function Property (): JSX.Element {
               <div className="near-places__list places__list">
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
-                    <a href="#">
+                    <Link to={AppRoute.Room}>
                       <img className="place-card__image" src="img/room.jpg" width={260} height={200} alt="Place image" />
-                    </a>
+                    </Link>
                   </div>
                   <div className="place-card__info">
                     <div className="place-card__price-wrapper">
@@ -254,16 +256,16 @@ function Property (): JSX.Element {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">Wood and stone place</a>
+                      <Link to={AppRoute.Room}>Wood and stone place</Link>
                     </h2>
                     <p className="place-card__type">Private room</p>
                   </div>
                 </article>
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
-                    <a href="#">
+                    <Link to={AppRoute.Room}>
                       <img className="place-card__image" src="img/apartment-02.jpg" width={260} height={200} alt="Place image" />
-                    </a>
+                    </Link>
                   </div>
                   <div className="place-card__info">
                     <div className="place-card__price-wrapper">
@@ -285,16 +287,16 @@ function Property (): JSX.Element {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">Canal View Prinsengracht</a>
+                      <Link to={AppRoute.Room}>Canal View Prinsengracht</Link>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
                 </article>
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
-                    <a href="#">
+                    <Link to={AppRoute.Room}>
                       <img className="place-card__image" src="img/apartment-03.jpg" width={260} height={200} alt="Place image" />
-                    </a>
+                    </Link>
                   </div>
                   <div className="place-card__info">
                     <div className="place-card__price-wrapper">
@@ -316,7 +318,7 @@ function Property (): JSX.Element {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">Nice, cozy, warm big bed apartment</a>
+                      <Link to={AppRoute.Room}>Nice, cozy, warm big bed apartment</Link>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
