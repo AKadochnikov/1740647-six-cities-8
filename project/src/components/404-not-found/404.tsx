@@ -1,5 +1,6 @@
 import {CSSProperties} from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from "../../const";
 
 const notFoundIdStyle: CSSProperties = {
   position: 'relative',
@@ -45,7 +46,7 @@ function NotFound ():JSX.Element {
         </div>
         <h2>Page not found</h2>
         <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-        <Link style={aStyle} to="/">home page</Link>
+        <Link style={aStyle} to={AppRoute.Main}>home page</Link>
       </div>
     </div>
   );

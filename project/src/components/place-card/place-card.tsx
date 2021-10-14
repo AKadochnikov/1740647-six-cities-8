@@ -3,12 +3,16 @@ import {getRating, ucFirst} from '../../const';
 
 type placeCardProps = {
   offer: offersMocks;
+  setActive: (id: number | undefined) => void;
 }
 
-function PlaceCard ({offer}: placeCardProps): JSX.Element {
-  const {isPremium, previewImage, price, rating, title, type, isFavorite} = offer;
+function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
+  const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offer;
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card"
+      onMouseEnter={() => setActive(id)}
+      onMouseLeave={() => setActive(undefined)}
+    >
       {isPremium ? <div className="place-card__mark"> <span>Premium</span> </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
