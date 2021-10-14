@@ -1,8 +1,8 @@
 import Logo from '../logo/logo';
 import {offersMocks} from '../../mocks/mock-types';
 import CardList from '../card-list/card-list';
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 type MainProps = {
   offers: offersMocks[];
