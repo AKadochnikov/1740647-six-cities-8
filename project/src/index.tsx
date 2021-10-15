@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import offers from './mocks/offers';
 
 const MainSetting = {
-  COUNT_STAY: 300,
+  OFFERS: offers,
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App countStay={MainSetting.COUNT_STAY}/>
+    <App
+      offers={MainSetting.OFFERS}
+    />
   </React.StrictMode>,
   document.getElementById('root'));

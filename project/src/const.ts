@@ -11,4 +11,12 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export {AppRoute, AuthorizationStatus};
+const ucFirst = (str: string): string => {
+  if (!str) {
+    return str;
+  }
+  return str[0].toUpperCase() + str.slice(1);
+};
+const getRating = (rating: number): number => (rating * 10) * 2;
+
+export {AppRoute, AuthorizationStatus, ucFirst, getRating};

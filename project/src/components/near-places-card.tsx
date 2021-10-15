@@ -1,23 +1,26 @@
-import {offersMocks} from '../../mocks/mock-types';
-import {getRating, ucFirst} from '../../const';
-import {useHistory} from 'react-router-dom';
+import {offersMocks} from '../mocks/mock-types';
+import {getRating} from '../const';
+import {useHistory, useLocation} from 'react-router-dom';
+import {useEffect} from 'react';
+import {ucFirst} from '../const';
 
-type placeCardProps = {
+type nearPlacesCardProps = {
   offer: offersMocks;
-  setActive: (id: number | undefined) => void;
 }
 
-function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
-  const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offer;
+function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
   const history = useHistory();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  const {id, previewImage, price, isFavorite, rating, type, title} = offer;
   return (
-    <article className="cities__place-card place-card"
-      onMouseEnter={() => setActive(id)}
-      onMouseLeave={() => setActive(undefined)}
-    >
-      {isPremium ? <div className="place-card__mark"> <span>Premium</span> </div> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a onClick={()=>history.push(`/offer/${id}`)}>
+    <article className="near-places__card place-card">
+      <div className="near-places__image-wrapper place-card__image-wrapper">
+        <a onClick={()=> history.push(`/offer/${id}`)}>
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
@@ -41,11 +44,12 @@ function PlaceCard ({offer, setActive}: placeCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={()=>history.push(`/offer/${id}`)}>{title}</a>
+          <a onClick={()=> history.push(`/offer/${id}`)}>{title}</a>
         </h2>
         <p className="place-card__type">{ucFirst(type)}</p>
       </div>
-    </article>);
+    </article>
+  );
 }
 
-export default PlaceCard;
+export default NearPlacesCard;

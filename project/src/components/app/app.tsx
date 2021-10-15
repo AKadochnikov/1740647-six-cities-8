@@ -6,17 +6,20 @@ import Login from '../login/login';
 import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
+import {offersMocks} from '../../mocks/mock-types';
 
 type AppProps = {
-  countStay: number;
+  offers: offersMocks[];
 }
 
-function App ({countStay}: AppProps): JSX.Element {
+function App ({offers}: AppProps): JSX.Element {
   return  (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <Main countStay={countStay} />
+          <Main
+            offers={offers}
+          />
         </Route>
 
         <Route exact path={AppRoute.SignIn}>
@@ -26,13 +29,18 @@ function App ({countStay}: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <Favorites />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => (
+            <Favorites
+              offers={offers}
+            />)}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
 
         <Route exact path={AppRoute.Room}>
-          <Property />
+          <Property
+            offers={offers}
+          />
         </Route>
 
         <Route>
