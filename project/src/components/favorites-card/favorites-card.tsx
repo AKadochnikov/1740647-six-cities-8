@@ -1,6 +1,7 @@
 import {offersMocks} from '../../mocks/mock-types';
 import {getRating, ucFirst} from '../../const';
-import {useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+
 
 type favoriteCardProps = {
   offer: offersMocks;
@@ -8,13 +9,13 @@ type favoriteCardProps = {
 
 function FavoritesCard({offer}: favoriteCardProps): JSX.Element {
   const {previewImage, price, rating, title, type, id} = offer;
-  const history = useHistory();
+
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a onClick={()=> history.push(`/offer/${id}`)}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -36,7 +37,7 @@ function FavoritesCard({offer}: favoriteCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={()=> history.push(`/offer/${id}`)}>{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{ucFirst(type)}</p>
       </div>

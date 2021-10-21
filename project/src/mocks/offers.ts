@@ -42,7 +42,7 @@ const offers: offersMocks[]  = [{
       longitude: 4.895168,
       zoom: 10,
     },
-    name: 'Cologne',
+    name: 'Amsterdam',
   },
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],

@@ -1,15 +1,14 @@
-import {offersMocks} from '../mocks/mock-types';
-import {getRating} from '../const';
-import {useHistory, useLocation} from 'react-router-dom';
+import {offersMocks} from '../../mocks/mock-types';
+import {getRating} from '../../const';
+import {Link, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import {ucFirst} from '../const';
+import {ucFirst} from '../../const';
 
 type nearPlacesCardProps = {
   offer: offersMocks;
 }
 
 function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
-  const history = useHistory();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -20,9 +19,9 @@ function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
   return (
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a onClick={()=> history.push(`/offer/${id}`)}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -44,7 +43,7 @@ function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={()=> history.push(`/offer/${id}`)}>{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{ucFirst(type)}</p>
       </div>
