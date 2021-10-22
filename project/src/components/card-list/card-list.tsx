@@ -1,21 +1,19 @@
 import PlaceCard from '../place-card/place-card';
 import {offersMocks} from '../../mocks/mock-types';
-import {useState} from 'react';
 
 type cardListProps = {
   offers: offersMocks[]
+  onMouseEnter: (id: number) => void;
+  onMouseLeave: () => void;
 }
 
-function CardList ({offers}: cardListProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<number | undefined>();
-
-  // eslint-disable-next-line no-console
-  console.log(activeCard);
+function CardList ({offers, onMouseLeave, onMouseEnter}: cardListProps): JSX.Element {
   return (
     <>
       {offers.map((offer: offersMocks) => (
         <PlaceCard
-          setActive={setActiveCard}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           key={offer.id}
           offer={offer}
         />

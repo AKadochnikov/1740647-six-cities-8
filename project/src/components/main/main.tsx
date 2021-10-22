@@ -1,14 +1,31 @@
 import Logo from '../logo/logo';
+import Map from '../map/map';
 import {offersMocks} from '../../mocks/mock-types';
 import CardList from '../card-list/card-list';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {useState} from 'react';
+import {ActiveOfferId} from '../../types/types';
 
 type MainProps = {
   offers: offersMocks[];
 }
 
 function Main ({ offers }: MainProps): JSX.Element {
+  const currentCity= offers[0].city;
+
+  const [activeOfferId, setActiveOfferId] = useState<ActiveOfferId>({
+    id: null,
+  });
+
+  const handleOfferMouseEnter = (id: number) => {
+    setActiveOfferId({id});
+  };
+
+  const handleOfferMouseLeave = () => {
+    setActiveOfferId({id: null});
+  };
+
   return (
     <>
       <div style={{display: 'none'}}>
@@ -114,12 +131,20 @@ function Main ({ offers }: MainProps): JSX.Element {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
                   <CardList
+                    onMouseEnter={handleOfferMouseEnter}
+                    onMouseLeave={handleOfferMouseLeave}
                     offers={offers}
                   />
                 </div>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"/>
+                <section className="cities__map map">
+                  <Map
+                    offers={offers}
+                    currentCity={currentCity}
+                    activeOffer={activeOfferId}
+                  />
+                </section>
               </div>
             </div>
           </div>

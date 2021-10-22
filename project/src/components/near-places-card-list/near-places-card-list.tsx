@@ -1,5 +1,5 @@
 import {offersMocks} from '../../mocks/mock-types';
-import NearPlacesCard from '../near-places-card';
+import NearPlacesCard from '../near-place-card/near-places-card';
 
 type nearPlacesCardListProps = {
   offers: offersMocks[];

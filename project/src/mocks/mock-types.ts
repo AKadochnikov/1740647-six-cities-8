@@ -1,13 +1,15 @@
-export type offersMocks = {
-  bedrooms: number;
-  city: {
+export type city = {
     location: {
       latitude: number;
       longitude: number;
       zoom: number;
     }
     name: string;
-  }
+}
+
+export type offersMocks = {
+  bedrooms: number;
+  city: city;
   description: string;
   goods: string[];
   host: {
