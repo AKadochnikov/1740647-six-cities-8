@@ -1,4 +1,4 @@
-import {ActionType, ChangeCityAction, LoadOffersAction} from '../types/action-types';
+import {ActionType, ChangeCityAction, LoadOffersAction, MainResetAction} from '../types/action-types';
 import offers from '../mocks/offers';
 
 const changeCity = (): ChangeCityAction => ({
@@ -10,4 +10,8 @@ const loadOffers = (): LoadOffersAction => ({
   offers: offers,
 });
 
-export {changeCity, loadOffers};
+const mainReset = (): MainResetAction => ({
+  type: ActionType.MainReset,
+});
+
+export {changeCity, loadOffers, mainReset};

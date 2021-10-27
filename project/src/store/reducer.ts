@@ -14,6 +14,8 @@ const reducer = (state: State = initialState, action: Actions) : State => {
       return {...state, city: state.city};
     case ActionType.LoadOffers:
       return {...state, offers: state.offers};
+    case ActionType.MainReset:
+      return {...initialState};
     default:
       return state;
   }

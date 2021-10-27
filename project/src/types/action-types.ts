@@ -14,4 +14,8 @@ export type LoadOffersAction = {
   offers: offerMock[];
 }
 
-export type Actions = LoadOffersAction | ChangeCityAction;
+export type MainResetAction = {
+  type: ActionType.MainReset;
+}
+
+export type Actions = LoadOffersAction | ChangeCityAction | MainResetAction;
