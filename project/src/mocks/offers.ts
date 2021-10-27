@@ -1,6 +1,6 @@
-import {offersMocks} from './mock-types';
+import {offerMock} from '../types/types';
 
-const offers: offersMocks[]  = [{
+const offers: offerMock[]  = [{
   bedrooms: 3,
   city: {
     location: {

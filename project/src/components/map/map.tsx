@@ -1,10 +1,9 @@
 import {useEffect, useRef} from 'react';
 import 'leaflet/dist/leaflet.css';
-import {city, offersMocks} from '../../mocks/mock-types';
 import useMap from '../../hooks/useMap';
 import {Marker, Icon} from 'leaflet';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
-import {ActiveOfferId} from '../../types/types';
+import {ActiveOfferId, city, offerMock} from '../../types/types';
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
@@ -19,7 +18,7 @@ const defaultCustomIcon = new Icon({
 });
 
 type mapProps = {
-  offers: offersMocks[];
+  offers: offerMock[];
   currentCity: city;
   activeOffer: ActiveOfferId;
 }

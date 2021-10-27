@@ -1,14 +1,13 @@
 import Logo from '../logo/logo';
 import Map from '../map/map';
-import {offersMocks} from '../../mocks/mock-types';
 import CardList from '../card-list/card-list';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {useState} from 'react';
-import {ActiveOfferId} from '../../types/types';
+import {ActiveOfferId, offerMock} from '../../types/types';
 
 type MainProps = {
-  offers: offersMocks[];
+  offers: offerMock[];
 }
 
 function Main ({ offers }: MainProps): JSX.Element {

@@ -2,13 +2,13 @@ import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import FormReview from '../form-review/form-review';
-import {offersMocks} from '../../mocks/mock-types';
 import {useParams} from 'react-router-dom';
 import {getRating, ucFirst} from '../../const';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
+import {offerMock} from '../../types/types';
 
 type propertyProps = {
-  offers: offersMocks[]
+  offers: offerMock[]
 }
 
 type paramsProps = {

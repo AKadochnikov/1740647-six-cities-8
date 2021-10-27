@@ -1,11 +1,11 @@
 import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
-import {offersMocks} from '../../mocks/mock-types';
 import {AppRoute} from '../../const';
+import {offerMock} from '../../types/types';
 
 type favoritesProps = {
-  offers: offersMocks[];
+  offers: offerMock[];
 }
 
 function Favorites({offers}: favoritesProps):JSX.Element {

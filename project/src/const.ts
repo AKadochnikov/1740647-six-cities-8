@@ -11,6 +11,8 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+const DEFAULT_CITY = 'Paris';
+
 const ucFirst = (str: string): string => {
   if (!str) {
     return str;
@@ -26,4 +28,4 @@ const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 
-export {AppRoute, AuthorizationStatus, ucFirst, getRating, URL_MARKER_CURRENT, URL_MARKER_DEFAULT};
+export {AppRoute, AuthorizationStatus, ucFirst, getRating, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, DEFAULT_CITY};
