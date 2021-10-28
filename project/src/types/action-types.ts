@@ -1,5 +1,3 @@
-import {offerMock} from './types';
-
 export enum ActionType {
   ChangeCity = 'main/changeCity',
   LoadOffers = 'main/LoadOffers',
@@ -8,10 +6,10 @@ export enum ActionType {
 
 export type ChangeCityAction = {
   type: ActionType.ChangeCity;
+  currentCity: string;
 }
 export type LoadOffersAction = {
   type: ActionType.LoadOffers;
-  offers: offerMock[];
 }
 
 export type MainResetAction = {

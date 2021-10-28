@@ -1,9 +1,12 @@
 import {useEffect, useRef} from 'react';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import {Marker, Icon} from 'leaflet';
+import {Marker, Icon, layerGroup} from 'leaflet';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
-import {ActiveOfferId, city, offerMock} from '../../types/types';
+import {ActiveOfferId} from '../../types/types';
+import {getLocation} from '../../utils';
+import {State} from '../../types/state-types';
+import {connect, ConnectedProps} from 'react-redux';
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
@@ -18,30 +21,43 @@ const defaultCustomIcon = new Icon({
 });
 
 type mapProps = {
-  offers: offerMock[];
-  currentCity: city;
   activeOffer: ActiveOfferId;
 }
 
-function Map ({offers, currentCity, activeOffer}: mapProps):JSX.Element {
+const mapStateToProps = ({city, offers}: State) => ({
+  city,
+  offers,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & mapProps;
+
+function Map (props: ConnectedComponentProps):JSX.Element {
+  const {activeOffer, city, offers} = props;
+  const currentCity= getLocation(city);
   const mapRef = useRef(null);
   const map = useMap(mapRef, currentCity);
   useEffect(()=> {
+    map?.flyTo([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
     if (map) {
-      offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude,
+      const layers = layerGroup().addTo(map);
+      if (offers.length > 0) {
+        offers.forEach((offer) => {
+          const marker = new Marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
+          });
+
+          marker
+            .setIcon(offer.id === activeOffer.id ? currentCustomIcon : defaultCustomIcon)
+            .addTo(layers);
         });
-
-        marker
-          .setIcon(offer.id === activeOffer.id ? currentCustomIcon : defaultCustomIcon)
-          .addTo(map);
-      });
+      }
     }
-  }, [map, offers, activeOffer]);
+  }, [map, offers, activeOffer, city]);
   return <div style={{height: '100%'}} ref={mapRef}/>;
-
 }
 
-export default Map;
+export default connector(Map);

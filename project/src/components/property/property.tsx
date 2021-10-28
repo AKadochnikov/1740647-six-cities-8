@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
-import {getRating, ucFirst} from '../../const';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
 import {offerMock} from '../../types/types';
+import {getRating, ucFirst} from '../../utils';
 
 type propertyProps = {
   offers: offerMock[]

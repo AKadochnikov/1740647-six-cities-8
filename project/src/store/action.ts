@@ -1,13 +1,12 @@
 import {ActionType, ChangeCityAction, LoadOffersAction, MainResetAction} from '../types/action-types';
-import offers from '../mocks/offers';
 
-const changeCity = (): ChangeCityAction => ({
+const changeCity = (city: string): ChangeCityAction => ({
   type: ActionType.ChangeCity,
+  currentCity: city,
 });
 
 const loadOffers = (): LoadOffersAction => ({
   type: ActionType.LoadOffers,
-  offers: offers,
 });
 
 const mainReset = (): MainResetAction => ({
