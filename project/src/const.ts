@@ -1,3 +1,5 @@
+import {layerGroup} from 'leaflet';
+
 enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -84,5 +86,6 @@ const URL_MARKER_DEFAULT =
 const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
+const LAYERS = layerGroup();
+export {AppRoute, AuthorizationStatus, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, LAYERS};
 
-export {AppRoute, AuthorizationStatus, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS};

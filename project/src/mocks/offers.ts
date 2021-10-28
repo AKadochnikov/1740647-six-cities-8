@@ -4,8 +4,8 @@ const offers: offerMock[]  = [{
   bedrooms: 3,
   city: {
     location: {
-      latitude: 48.864716,
-      longitude: 2.349014,
+      latitude: 50.864716,
+      longitude: 3.349014,
       zoom: 10,
     },
     name: 'Paris',
