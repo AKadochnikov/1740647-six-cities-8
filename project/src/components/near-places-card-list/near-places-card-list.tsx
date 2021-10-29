@@ -1,14 +1,14 @@
-import {offersMocks} from '../../mocks/mock-types';
 import NearPlacesCard from '../near-place-card/near-places-card';
+import {offerMock} from '../../types/types';
 
 type nearPlacesCardListProps = {
-  offers: offersMocks[];
+  offers: offerMock[];
 }
 
 function NearPlacesCardList({offers}: nearPlacesCardListProps): JSX.Element {
   return (
     <>
-      {offers.map((offer: offersMocks) => (
+      {offers.map((offer: offerMock) => (
         <NearPlacesCard
           key={offer.id}
           offer={offer}

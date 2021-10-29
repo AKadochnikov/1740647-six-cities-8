@@ -6,10 +6,10 @@ import Login from '../login/login';
 import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
-import {offersMocks} from '../../mocks/mock-types';
+import {offerMock} from '../../types/types';
 
 type AppProps = {
-  offers: offersMocks[];
+  offers: offerMock[];
 }
 
 function App ({offers}: AppProps): JSX.Element {
@@ -17,9 +17,7 @@ function App ({offers}: AppProps): JSX.Element {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <Main
-            offers={offers}
-          />
+          <Main/>
         </Route>
 
         <Route exact path={AppRoute.SignIn}>

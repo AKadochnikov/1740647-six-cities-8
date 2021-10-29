@@ -1,14 +1,14 @@
-import {offersMocks} from './mock-types';
+import {offerMock} from '../types/types';
 
-const offers: offersMocks[]  = [{
+const offers: offerMock[]  = [{
   bedrooms: 3,
   city: {
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 50.864716,
+      longitude: 3.349014,
       zoom: 10,
     },
-    name: 'Amsterdam',
+    name: 'Paris',
   },
   description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
   goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -23,8 +23,8 @@ const offers: offersMocks[]  = [{
   isFavorite: false,
   isPremium: true,
   location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
+    latitude: 48.866939,
+    longitude: 2.385488,
     zoom: 8,
   },
   maxAdults: 4,

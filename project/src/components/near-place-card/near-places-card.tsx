@@ -1,11 +1,10 @@
-import {offersMocks} from '../../mocks/mock-types';
-import {getRating} from '../../const';
 import {Link, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import {ucFirst} from '../../const';
+import {offerMock} from '../../types/types';
+import {getRating, ucFirst} from '../../utils';
 
 type nearPlacesCardProps = {
-  offer: offersMocks;
+  offer: offerMock;
 }
 
 function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
