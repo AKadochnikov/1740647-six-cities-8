@@ -1,16 +1,16 @@
-import {ActionType, ChangeCityAction, LoadOffersAction, MainResetAction} from '../types/action-types';
+import {ActionType} from '../types/action-types';
 
-const changeCity = (city: string): ChangeCityAction => ({
+const changeCity = (city: string) => ({
   type: ActionType.ChangeCity,
   currentCity: city,
-});
+} as const);
 
-const loadOffers = (): LoadOffersAction => ({
+const loadOffers = () => ({
   type: ActionType.LoadOffers,
-});
+} as const);
 
-const mainReset = (): MainResetAction => ({
+const mainReset = () => ({
   type: ActionType.MainReset,
-});
+} as const);
 
 export {changeCity, loadOffers, mainReset};
