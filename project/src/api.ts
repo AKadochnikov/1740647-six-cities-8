@@ -1,4 +1,5 @@
-import axios, {AxiosError, AxiosInstance, AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import {getToken} from "./token";
 import {BACKEND_URL, REQUEST_TIME_OUT} from './const';
 import {UnauthorizedCallback} from './types/api-types';
 
@@ -23,6 +24,18 @@ export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       }
 
       return Promise.reject(error);
+    },
+  );
+
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const token = getToken();
+
+      if (token) {
+        config.headers['x-token'] = token;
+      }
+
+      return config;
     },
   );
 
