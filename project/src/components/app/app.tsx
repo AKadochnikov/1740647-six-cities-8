@@ -1,3 +1,4 @@
+import {connect, ConnectedProps} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import Main from '../main/main';
@@ -7,12 +8,33 @@ import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
 import {Offer} from '../../types/types';
+import Loading from '../loading/loading';
+import {isCheckedAuth} from '../../utils';
+import {State} from '../../types/state-types';
 
 type AppProps = {
   offers: Offer[];
 }
 
-function App ({offers}: AppProps): JSX.Element {
+const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & AppProps;
+
+function App (props: ConnectedComponentProps): JSX.Element {
+  const {offers, isDataLoaded, authorizationStatus} = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <Loading/>
+    );
+  }
+
   return  (
     <BrowserRouter>
       <Switch>
@@ -49,5 +71,5 @@ function App ({offers}: AppProps): JSX.Element {
     </BrowserRouter>
   );
 }
-
-export default App;
+export {App};
+export default connector(App);

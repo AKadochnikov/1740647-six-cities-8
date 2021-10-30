@@ -1,5 +1,6 @@
 import {City, Offer} from './types/types';
 import {LOCATIONS} from './const';
+import {AuthorizationStatus} from './const';
 
 const ucFirst = (str: string): string => {
   if (!str) {
@@ -44,7 +45,7 @@ const adaptToClient = (offers: Offer[]): Offer[] => offers.map((offer) => {
   return adaptedOffer;
 });
 
-const adaptToServer = (offer: Offer): Offer => {
+const adaptToServer = (offers: Offer[]): Offer[] => offers.map((offer) => {
   const adaptedOffer = Object.assign(
     {},
     offer,
@@ -68,7 +69,10 @@ const adaptToServer = (offer: Offer): Offer => {
   delete adaptedOffer.host.avatarUrl;
 
   return adaptedOffer;
-};
+});
 
-export {getRating, ucFirst, getOffers, getLocation, adaptToClient, adaptToServer};
+const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
+
+export {getRating, ucFirst, getOffers, getLocation, adaptToClient, adaptToServer, isCheckedAuth};
 
