@@ -5,11 +5,14 @@ import {APIRoute, AuthorizationStatus} from '../const';
 import {Offer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api-types';
+import {adaptToClient} from '../utils';
 
-export const fetchQuestionAction = (): ThunkActionResult =>
+export const fetchHotelsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<Offer[]>(APIRoute.Hotels);
-    dispatch(loadOffers(data));
+    const adaptedData = data.map((dataItem)=> adaptToClient(dataItem));
+
+    dispatch(loadOffers(adaptedData));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

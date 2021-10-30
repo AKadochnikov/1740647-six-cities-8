@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {getToken} from './services/token';
-import {BACKEND_URL, REQUEST_TIME_OUT} from './const';
-import {UnauthorizedCallback} from './types/api-types';
+import {getToken} from './token';
+import {BACKEND_URL, REQUEST_TIME_OUT} from '../const';
+import {UnauthorizedCallback} from '../types/api-types';
 
 enum HttpCode {
   Unauthorized = 401,

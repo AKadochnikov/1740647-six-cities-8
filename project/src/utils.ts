@@ -9,54 +9,66 @@ const ucFirst = (str: string): string => {
 };
 const getRating = (rating: number): number => (rating * 10) * 2;
 
-const getOffers = (currentCity: string, offers: Offer[]) => offers.slice().filter((currentOffer) => currentOffer.city.name === currentCity);
+const getOffers = (currentCity: string, currentOffer: Offer) => currentOffer.city.name === currentCity;
 
 const getLocation = (currentCity: string): City => {
   const newLocation = LOCATIONS.filter((currentLocation) => currentLocation.city.name === currentCity);
   return newLocation[0].city;
 };
 
-//TODO набросок адаптера
-/*static adaptToClient(event) {
-  const adaptedEvent = Object.assign(
+const adaptToClient = (offer: Offer): Offer => {
+  const adaptedOffer = Object.assign(
     {},
-    event,
+    offer,
     {
-      basePrice: event['base_price'],
-      dateFrom: dayjs(event['date_from'], 'YYYY-MM-DDTHH:mm:ssZ[Z]'),
-      dateTo: dayjs(event['date_to'], 'YYYY-MM-DDTHH:mm:ssZ[Z]'),
-      isFavorite: event['is_favorite'],
+      previewImage: offer['preview_image'],
+      isFavorite: offer['is_favorite'],
+      isPremium: offer['is_premium'],
+      maxAdults: offer['max_adults'],
+      host:{
+        id: offer.host.id,
+        isPro: offer.host['is_pro'],
+        name: offer.host.name,
+        avatarUrl: offer.host['avatar_url'],
+      },
     },
   );
 
-  delete adaptedEvent['base_price'];
-  delete adaptedEvent['date_from'];
-  delete adaptedEvent['date_to'];
-  delete adaptedEvent['is_favorite'];
+  delete adaptedOffer['preview_image'];
+  delete adaptedOffer['is_favorite'];
+  delete adaptedOffer['is_premium'];
+  delete adaptedOffer['max_adults'];
+  delete adaptedOffer.host['is_pro'];
+  delete adaptedOffer.host['avatar_url'];
 
-  return adaptedEvent;
-}
+  return adaptedOffer;
+};
 
-static adaptToServer(event) {
-  const adaptedEvent = Object.assign(
+const adaptToServer = (offer: Offer): Offer => {
+  const adaptedOffer = Object.assign(
     {},
-    event,
+    offer,
     {
-      'base_price': event.basePrice,
-      'date_from': event.dateFrom.toISOString(),
-      'date_to': event.dateTo.toISOString(),
-      'is_favorite': event.isFavorite,
+      'preview_image': offer.previewImage,
+      'is_favorite': offer.isFavorite,
+      'is_premium': offer.isPremium,
+      'max_adults': offer.maxAdults,
+      host:{
+        'is_pro': offer.host.isPro,
+        'avatar_url': offer.host.avatarUrl,
+      },
     },
   );
 
-  delete adaptedEvent.basePrice;
-  delete adaptedEvent.dateFrom;
-  delete adaptedEvent.dateTo;
-  delete adaptedEvent.isFavorite;
+  delete adaptedOffer.previewImage;
+  delete adaptedOffer.isFavorite;
+  delete adaptedOffer.isPremium;
+  delete adaptedOffer.maxAdults;
+  delete adaptedOffer.host.isPro;
+  delete adaptedOffer.host.avatarUrl;
 
-  return adaptedEvent;
-}
-}*/
+  return adaptedOffer;
+};
 
-export {getRating, ucFirst, getOffers, getLocation};
+export {getRating, ucFirst, getOffers, getLocation, adaptToClient, adaptToServer};
 

@@ -24,9 +24,9 @@ type mapProps = {
   activeOffer: ActiveOfferId;
 }
 
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({city, filteredOffers}: State) => ({
   city,
-  offers,
+  filteredOffers,
 });
 
 const connector = connect(mapStateToProps);
@@ -35,16 +35,15 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & mapProps;
 
 function Map (props: ConnectedComponentProps):JSX.Element {
-  const {activeOffer, city, offers} = props;
+  const {activeOffer, city, filteredOffers} = props;
   const currentCity= getLocation(city);
   const mapRef = useRef(null);
   const map = useMap(mapRef, currentCity);
   useEffect(()=> {
-    map?.flyTo([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
     LAYERS.clearLayers();
     if (map) {
-      if (offers.length > 0) {
-        offers.forEach((offer) => {
+      if (filteredOffers.length > 0) {
+        filteredOffers.forEach((offer) => {
           const marker = new Marker({
             lat: offer.location.latitude,
             lng: offer.location.longitude,
@@ -56,7 +55,12 @@ function Map (props: ConnectedComponentProps):JSX.Element {
       }
       map.addLayer(LAYERS);
     }
-  }, [map, offers, activeOffer, city]);
+  }, [map, filteredOffers, activeOffer, city]);
+
+  useEffect(()=> {
+    map?.flyTo([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
+  },[city]);
+
   return <div style={{height: '100%'}} ref={mapRef}/>;
 }
 
