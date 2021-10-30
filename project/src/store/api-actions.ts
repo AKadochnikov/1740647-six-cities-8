@@ -10,8 +10,7 @@ import {adaptToClient} from '../utils';
 export const fetchHotelsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<Offer[]>(APIRoute.Hotels);
-    const adaptedData = data.map((dataItem)=> adaptToClient(dataItem));
-
+    const adaptedData = adaptToClient(data);
     dispatch(loadOffers(adaptedData));
   };
 

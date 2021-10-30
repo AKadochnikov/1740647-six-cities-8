@@ -16,7 +16,7 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptToClient = (offer: Offer): Offer => {
+const adaptToClient = (offers: Offer[]): Offer[] => offers.map((offer) => {
   const adaptedOffer = Object.assign(
     {},
     offer,
@@ -42,7 +42,7 @@ const adaptToClient = (offer: Offer): Offer => {
   delete adaptedOffer.host['avatar_url'];
 
   return adaptedOffer;
-};
+});
 
 const adaptToServer = (offer: Offer): Offer => {
   const adaptedOffer = Object.assign(
