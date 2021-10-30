@@ -2,7 +2,7 @@ export type ActiveOfferId = {
   id: number | null;
 };
 
-export type city = {
+export type City = {
   location: {
     latitude: number;
     longitude: number;
@@ -10,9 +10,9 @@ export type city = {
   }
   name: string;
 }
-export type offer = {
+export type Offer = {
   bedrooms: number;
-  city: city;
+  city: City;
   description: string;
   goods: string[];
   host: {

@@ -1,10 +1,10 @@
 import {Link, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type nearPlacesCardProps = {
-  offerItem: offer;
+  offerItem: Offer;
 }
 
 function NearPlacesCard ({offerItem}: nearPlacesCardProps): JSX.Element {

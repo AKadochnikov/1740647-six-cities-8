@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 
 type favoriteCardProps = {
-  offerItem: offer;
+  offerItem: Offer;
 }
 
 function FavoritesCard({offerItem}: favoriteCardProps): JSX.Element {

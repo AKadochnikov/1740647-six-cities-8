@@ -13,6 +13,12 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+enum APIRoute {
+  Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 const AUTH_TOKEN_KEY_NAME = 'user-token';
 
 const BACKEND_URL = 'https://8.react.pages.academy/six-cities';
@@ -93,5 +99,6 @@ const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 const LAYERS = layerGroup();
-export {AppRoute, AuthorizationStatus, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, LAYERS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME};
+
+export {AppRoute, AuthorizationStatus, APIRoute, URL_MARKER_CURRENT, URL_MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, LAYERS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME};
 

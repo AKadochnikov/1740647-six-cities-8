@@ -1,11 +1,11 @@
 import FavoritesCard from '../favorites-card/favorites-card';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 
 type favoriteListProp = {
   city: string;
-  offers: offer[];
+  offers: Offer[];
 }
 
 function FavoritesList({offers, city}: favoriteListProp):JSX.Element {

@@ -4,7 +4,7 @@ import {Actions} from '../../types/action-types';
 import {MouseEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import CityListTab from '../city-list-item/city-list-tab';
-import {changeCity, changeOffers} from '../../store/action';
+import {changeCity, changeOffers} from '../../store/actions';
 
 type CityListProps = {
   city: string;

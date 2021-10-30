@@ -4,11 +4,11 @@ import {AppRoute} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type propertyProps = {
-  offers: offer[]
+  offers: Offer[]
 }
 
 type paramsProps = {

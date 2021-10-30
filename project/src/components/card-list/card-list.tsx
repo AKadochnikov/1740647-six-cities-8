@@ -1,8 +1,8 @@
 import PlaceCard from '../place-card/place-card';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 
 type cardListProps = {
-  offers: offer[]
+  offers: Offer[]
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
@@ -10,7 +10,7 @@ type cardListProps = {
 function CardList ({offers, onMouseLeave, onMouseEnter}: cardListProps): JSX.Element {
   return (
     <>
-      {offers.map((offerItem: offer) => (
+      {offers.map((offerItem: Offer) => (
         <PlaceCard
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

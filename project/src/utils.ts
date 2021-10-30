@@ -1,4 +1,4 @@
-import {city, offer} from './types/types';
+import {City, Offer} from './types/types';
 import {LOCATIONS} from './const';
 
 const ucFirst = (str: string): string => {
@@ -9,9 +9,9 @@ const ucFirst = (str: string): string => {
 };
 const getRating = (rating: number): number => (rating * 10) * 2;
 
-const getOffers = (currentCity: string, offers: offer[]) => offers.slice().filter((currentOffer) => currentOffer.city.name === currentCity);
+const getOffers = (currentCity: string, offers: Offer[]) => offers.slice().filter((currentOffer) => currentOffer.city.name === currentCity);
 
-const getLocation = (currentCity: string): city => {
+const getLocation = (currentCity: string): City => {
   const newLocation = LOCATIONS.filter((currentLocation) => currentLocation.city.name === currentCity);
   return newLocation[0].city;
 };

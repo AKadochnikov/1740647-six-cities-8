@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
-import {offer} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type placeCardProps = {
-  offerItem: offer;
+  offerItem: Offer;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }

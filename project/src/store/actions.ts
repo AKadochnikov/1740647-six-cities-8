@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action-types';
-import {offer} from '../types/types';
+import {Offer} from '../types/types';
 import {AuthorizationStatus} from '../const';
 
 const changeCity = (city: string) => ({
@@ -15,7 +15,7 @@ const mainReset = () => ({
   type: ActionType.MainReset,
 } as const);
 
-const loadOffers = (offers: offer[]) => ({
+const loadOffers = (offers: Offer[]) => ({
   type: ActionType.LoadOffers,
   offers: offers,
 } as const);

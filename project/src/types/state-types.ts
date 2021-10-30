@@ -1,8 +1,8 @@
-import {offer} from './types';
+import {Offer} from './types';
 import {AuthorizationStatus} from '../const';
 
 export type State = {
   city: string;
-  offers: offer[];
+  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 }
