@@ -10,7 +10,7 @@ export type city = {
   }
   name: string;
 }
-export type offerMock = {
+export type offer = {
   bedrooms: number;
   city: city;
   description: string;

@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom';
-import {offerMock} from '../../types/types';
+import {offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 
 type favoriteCardProps = {
-  offer: offerMock;
+  offerItem: offer;
 }
 
-function FavoritesCard({offer}: favoriteCardProps): JSX.Element {
-  const {previewImage, price, rating, title, type, id} = offer;
+function FavoritesCard({offerItem}: favoriteCardProps): JSX.Element {
+  const {previewImage, price, rating, title, type, id} = offerItem;
 
   return (
     <article className="favorites__card place-card">

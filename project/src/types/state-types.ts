@@ -1,6 +1,6 @@
-import {offerMock} from './types';
+import {offer} from './types';
 
 export type State = {
   city: string;
-  offers: offerMock[];
+  offers: offer[];
 }

@@ -6,10 +6,10 @@ import Login from '../login/login';
 import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
-import {offerMock} from '../../types/types';
+import {offer} from '../../types/types';
 
 type AppProps = {
-  offers: offerMock[];
+  offers: offer[];
 }
 
 function App ({offers}: AppProps): JSX.Element {
