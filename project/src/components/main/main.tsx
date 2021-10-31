@@ -9,9 +9,9 @@ import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state-types';
 
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({city, filteredOffers}: State) => ({
   city,
-  offers,
+  filteredOffers,
 });
 
 const connector = connect(mapStateToProps);
@@ -20,7 +20,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function Main (props: ConnectedComponentProps): JSX.Element {
-  const {city, offers} = props;
+  const {city, filteredOffers} = props;
 
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferId>({
     id: null,
@@ -89,11 +89,11 @@ function Main (props: ConnectedComponentProps): JSX.Element {
             </section>
           </div>
           <div className="cities">
-            <div className={`cities__places-container ${offers.length > 0? 'cities__places-container--empty': ''} container`}>
-              {offers.length > 0?
+            <div className={`cities__places-container ${filteredOffers.length > 0? 'cities__places-container--empty': ''} container`}>
+              {filteredOffers.length > 0?
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{offers.length} places to stay in {city}</b>
+                  <b className="places__found">{filteredOffers.length} places to stay in {city}</b>
                   <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex={0}>
@@ -113,7 +113,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                     <CardList
                       onMouseEnter={handleOfferMouseEnter}
                       onMouseLeave={handleOfferMouseLeave}
-                      offers={offers}
+                      offers={filteredOffers}
                     />
                   </div>
                 </section> :

@@ -1,15 +1,15 @@
 import {Link} from 'react-router-dom';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type placeCardProps = {
-  offer: offerMock;
+  offerItem: Offer;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function PlaceCard ({offer, onMouseEnter, onMouseLeave}: placeCardProps): JSX.Element {
-  const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offer;
+function PlaceCard ({offerItem, onMouseEnter, onMouseLeave}: placeCardProps): JSX.Element {
+  const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offerItem;
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={() => onMouseEnter(id)}

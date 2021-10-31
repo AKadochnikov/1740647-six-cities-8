@@ -2,15 +2,15 @@ import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
 import {AppRoute} from '../../const';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 
 type favoritesProps = {
-  offers: offerMock[];
+  offers: Offer[];
 }
 
 function Favorites({offers}: favoritesProps):JSX.Element {
   const Cities: Set<string> = new Set();
-  offers.slice().filter((offer) => offer.isFavorite).forEach((offer) => Cities.add(offer.city.name));
+  offers.slice().filter((offerItem) => offerItem.isFavorite).forEach((offerItem) => Cities.add(offerItem.city.name));
   return (
     <div>
       <div style={{display: 'none'}}>

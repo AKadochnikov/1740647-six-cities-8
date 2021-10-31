@@ -4,11 +4,11 @@ import {AppRoute} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type propertyProps = {
-  offers: offerMock[]
+  offers: Offer[]
 }
 
 type paramsProps = {
@@ -18,7 +18,7 @@ type paramsProps = {
 function Property ({offers}: propertyProps): JSX.Element {
   const params: paramsProps = useParams();
   const currentId = Number(params.id);
-  const currentIndex = offers.findIndex((offer) => offer.id === currentId);
+  const currentIndex = offers.findIndex((offerItem) => offerItem.id === currentId);
   const currentOffer = offers[currentIndex];
   const newOffers = offers.slice();
   newOffers.splice(currentIndex, 1);

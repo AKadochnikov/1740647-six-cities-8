@@ -1,11 +1,11 @@
 import FavoritesCard from '../favorites-card/favorites-card';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 
 type favoriteListProp = {
   city: string;
-  offers: offerMock[];
+  offers: Offer[];
 }
 
 function FavoritesList({offers, city}: favoriteListProp):JSX.Element {
@@ -19,10 +19,10 @@ function FavoritesList({offers, city}: favoriteListProp):JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {offers.slice().filter((offer) => offer.city.name === city && offer.isFavorite).map((offer) => (
+        {offers.slice().filter((offerItem) => offerItem.city.name === city && offerItem.isFavorite).map((offerItem) => (
           <FavoritesCard
-            offer={offer}
-            key={offer.id}
+            offerItem={offerItem}
+            key={offerItem.id}
           />
         ))}
       </div>

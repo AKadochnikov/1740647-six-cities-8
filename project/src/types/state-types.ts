@@ -1,6 +1,10 @@
-import {offerMock} from './types';
+import {Offer} from './types';
+import {AuthorizationStatus} from '../const';
 
 export type State = {
   city: string;
-  offers: offerMock[];
+  offers: Offer[];
+  filteredOffers: Offer[];
+  authorizationStatus: AuthorizationStatus;
+  isDataLoaded: boolean;
 }

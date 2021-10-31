@@ -1,20 +1,20 @@
 import {Link, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
 type nearPlacesCardProps = {
-  offer: offerMock;
+  offerItem: Offer;
 }
 
-function NearPlacesCard ({offer}: nearPlacesCardProps): JSX.Element {
+function NearPlacesCard ({offerItem}: nearPlacesCardProps): JSX.Element {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const {id, previewImage, price, isFavorite, rating, type, title} = offer;
+  const {id, previewImage, price, isFavorite, rating, type, title} = offerItem;
   return (
     <article className="near-places__card place-card">
       <div className="near-places__image-wrapper place-card__image-wrapper">

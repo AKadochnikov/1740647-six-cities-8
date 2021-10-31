@@ -1,8 +1,8 @@
 import PlaceCard from '../place-card/place-card';
-import {offerMock} from '../../types/types';
+import {Offer} from '../../types/types';
 
 type cardListProps = {
-  offers: offerMock[]
+  offers: Offer[]
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
@@ -10,12 +10,12 @@ type cardListProps = {
 function CardList ({offers, onMouseLeave, onMouseEnter}: cardListProps): JSX.Element {
   return (
     <>
-      {offers.map((offer: offerMock) => (
+      {offers.map((offerItem: Offer) => (
         <PlaceCard
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          key={offer.id}
-          offer={offer}
+          key={offerItem.id}
+          offerItem={offerItem}
         />
       ))}
     </>

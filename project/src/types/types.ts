@@ -2,7 +2,7 @@ export type ActiveOfferId = {
   id: number | null;
 };
 
-export type city = {
+export type City = {
   location: {
     latitude: number;
     longitude: number;
@@ -10,31 +10,36 @@ export type city = {
   }
   name: string;
 }
-export type offerMock = {
+export type Offer = {
   bedrooms: number;
-  city: city;
+  city: City;
   description: string;
   goods: string[];
   host: {
-    avatarUrl: string;
+    avatarUrl?: string;
     id: number;
-    isPro: boolean;
+    isPro?: boolean;
     name: string;
+    'is_pro'?: boolean,
+    'avatar_url'?: string,
   }
   id: number;
   images: string[];
-  isFavorite: boolean;
-  isPremium: boolean;
+  isFavorite?: boolean;
+  isPremium?: boolean;
   location: {
     latitude: number;
     longitude: number;
     zoom: number;
   }
-  maxAdults: number;
-  previewImage: string;
+  maxAdults?: number;
+  previewImage?: string;
   price: number;
   rating: number;
   title: string;
-  type: string
+  type: string,
+  'preview_image'?: string,
+  'is_favorite'?: boolean,
+  'is_premium'?: boolean,
+  'max_adults'?: number,
 }
-
