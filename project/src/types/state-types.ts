@@ -1,10 +1,10 @@
-import {Offer} from './types';
+import {Offers} from './types';
 import {AuthorizationStatus} from '../const';
 
 export type State = {
-  city: string;
-  offers: Offer[];
-  filteredOffers: Offer[];
-  authorizationStatus: AuthorizationStatus;
-  isDataLoaded: boolean;
+  city: string,
+  offers: Offers,
+  filteredOffers: Offers,
+  authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
 }

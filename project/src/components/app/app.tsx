@@ -7,13 +7,13 @@ import Login from '../login/login';
 import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
-import {Offer} from '../../types/types';
+import {Offers} from '../../types/types';
 import Loading from '../loading/loading';
 import {isCheckedAuth} from '../../utils';
 import {State} from '../../types/state-types';
 
 type AppProps = {
-  offers: Offer[];
+  offers: Offers;
 }
 
 const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({

@@ -1,4 +1,4 @@
-import {City, Offer} from './types/types';
+import {City, Offer, Offers} from './types/types';
 import {LOCATIONS} from './const';
 import {AuthorizationStatus} from './const';
 
@@ -17,7 +17,7 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptOffersToClient = (offers: Offer[]): Offer[] => offers.map((offer) => {
+const adaptOffersToClient = (offers: Offers) => offers.map((offer) => {
   const adaptedOffer: Offer ={
     ...offer,
     ...{
@@ -44,7 +44,7 @@ const adaptOffersToClient = (offers: Offer[]): Offer[] => offers.map((offer) => 
   return adaptedOffer;
 });
 
-const adaptOffersToServer = (offers: Offer[]): Offer[] => offers.map((offer) => {
+const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
   const adaptedOffer: Offer ={
     ...offer,
     ...{

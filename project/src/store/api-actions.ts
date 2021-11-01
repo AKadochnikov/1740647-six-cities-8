@@ -2,14 +2,14 @@ import {ThunkActionResult} from '../types/action-types';
 import {loadOffers, requireAuthorization, requireLogout} from './actions';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
-import {Offer} from '../types/types';
+import {Offers} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api-types';
 import {adaptOffersToClient} from '../utils';
 
 export const fetchHotelsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(APIRoute.Hotels);
+    const {data} = await api.get<Offers>(APIRoute.Hotels);
     const adaptedData = adaptOffersToClient(data);
     dispatch(loadOffers(adaptedData));
   };

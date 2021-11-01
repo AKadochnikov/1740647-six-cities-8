@@ -1,8 +1,8 @@
 import PlaceCard from '../place-card/place-card';
-import {Offer} from '../../types/types';
+import {Offers, Offer} from '../../types/types';
 
 type cardListProps = {
-  offers: Offer[]
+  offers: Offers
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }

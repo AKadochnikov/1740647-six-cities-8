@@ -13,25 +13,38 @@ const initialState = {
 
 const reducer = (state: State = initialState, action: Actions) : State => {
   switch (action.type){
-    case ActionType.ChangeCity:
-      return {...state, city: action.currentCity};
+
+    case ActionType.ChangeCity:{
+      const {city} = action.payload;
+      return {...state, city: city};
+    }
+
     case ActionType.ChangeOffers:
       return {...state, filteredOffers: state.offers.slice().filter((offerItem) => getOffers(state.city, offerItem))};
+
     case ActionType.MainReset:
       return {...state, filteredOffers: state.offers.slice().filter((offerItem) => getOffers(DEFAULT_CITY, offerItem))};
-    case ActionType.LoadOffers:
+
+    case ActionType.LoadOffers: {
+      const {offers} = action.payload;
       return {...state,
-        offers: action.offers,
-        filteredOffers: action.offers.slice().filter((offerItem) => getOffers(DEFAULT_CITY, offerItem)),
+        offers: offers,
+        filteredOffers: offers.slice().filter((offerItem) => getOffers(DEFAULT_CITY, offerItem)),
       };
-    case ActionType.RequireAuthorization:
+    }
+
+    case ActionType.RequireAuthorization: {
+      const {authStatus} = action.payload;
       return {
         ...state,
-        authorizationStatus: action.authorizationStatus,
+        authorizationStatus: authStatus,
         isDataLoaded: true,
       };
+    }
+
     case ActionType.RequireLogout:
       return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
+
     default:
       return {...state, offers: state.offers};
   }
