@@ -1,4 +1,4 @@
-import {ActionType} from '../types/action-types';
+import {ActionType} from '../types/action';
 import {Offers} from '../types/types';
 import {AuthorizationStatus} from '../const';
 

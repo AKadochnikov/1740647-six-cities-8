@@ -10,7 +10,7 @@ import PrivateRoute from '../private-route/private-route';
 import {Offers} from '../../types/types';
 import Loading from '../loading/loading';
 import {isCheckedAuth} from '../../utils';
-import {State} from '../../types/state-types';
+import {State} from '../../types/state';
 
 type AppProps = {
   offers: Offers;

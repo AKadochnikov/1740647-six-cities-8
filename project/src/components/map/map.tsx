@@ -5,7 +5,7 @@ import {Icon, Marker} from 'leaflet';
 import {LAYERS, URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 import {ActiveOfferId} from '../../types/types';
 import {getLocation} from '../../utils';
-import {State} from '../../types/state-types';
+import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
 
 const currentCustomIcon = new Icon({

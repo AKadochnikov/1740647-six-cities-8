@@ -1,6 +1,6 @@
 import {DEFAULT_CITY, AuthorizationStatus} from '../const';
-import {State} from '../types/state-types';
-import {Actions, ActionType} from '../types/action-types';
+import {State} from '../types/state';
+import {Actions, ActionType} from '../types/action';
 import {getOffers} from '../utils';
 
 const initialState = {

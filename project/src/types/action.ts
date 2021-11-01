@@ -1,7 +1,7 @@
 import {changeOffers, changeCity, mainReset, loadOffers, requireAuthorization, requireLogout} from '../store/actions';
 import {ThunkAction, ThunkDispatch} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {State} from './state-types';
+import {State} from './state';
 
 export enum ActionType {
   ChangeCity = 'main/changeCity',

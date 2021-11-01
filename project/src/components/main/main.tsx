@@ -7,7 +7,7 @@ import {useState} from 'react';
 import {ActiveOfferId} from '../../types/types';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
-import {State} from '../../types/state-types';
+import {State} from '../../types/state';
 
 const mapStateToProps = ({city, filteredOffers}: State) => ({
   city,
