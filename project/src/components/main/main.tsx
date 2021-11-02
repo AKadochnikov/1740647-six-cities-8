@@ -1,15 +1,14 @@
 import Logo from '../logo/logo';
 import Map from '../map/map';
 import CardList from '../card-list/card-list';
-import {Link} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AuthorizationStatus} from '../../const';
 import {useState} from 'react';
 import {ActiveOfferId} from '../../types/types';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state';
-import Logged from "../logged/logged";
-import NotLogged from "../not-logged/not-logged";
+import Logged from '../logged/logged';
+import NotLogged from '../not-logged/not-logged';
 
 const mapStateToProps = ({city, filteredOffers, authorizationStatus}: State) => ({
   city,
