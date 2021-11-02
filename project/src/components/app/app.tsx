@@ -1,6 +1,6 @@
 import {connect, ConnectedProps} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import Main from '../main/main';
 import Favorites from '../favorites/favorites';
 import Login from '../login/login';
@@ -53,7 +53,6 @@ function App (props: ConnectedComponentProps): JSX.Element {
             <Favorites
               offers={offers}
             />)}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
 
