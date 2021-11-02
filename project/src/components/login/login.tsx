@@ -2,15 +2,12 @@ import Logo from '../logo/logo';
 import {Link, Redirect} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {useRef, FormEvent} from 'react';
-import {useHistory} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 import {State} from '../../types/state';
-import {isCheckedAuth} from "../../utils";
-import Loading from "../loading/loading";
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus} from '../../const';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -33,8 +30,6 @@ function Login(props: PropsFromRedux): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const history = useHistory();
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if(loginRef.current !== null && passwordRef.current !== null) {
@@ -42,7 +37,6 @@ function Login(props: PropsFromRedux): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
-      history.push(AppRoute.Main);
     }
   };
 

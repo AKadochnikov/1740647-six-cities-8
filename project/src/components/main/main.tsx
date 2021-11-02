@@ -2,16 +2,19 @@ import Logo from '../logo/logo';
 import Map from '../map/map';
 import CardList from '../card-list/card-list';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {useState} from 'react';
 import {ActiveOfferId} from '../../types/types';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state';
+import Logged from "../logged/logged";
+import NotLogged from "../not-logged/not-logged";
 
-const mapStateToProps = ({city, filteredOffers}: State) => ({
+const mapStateToProps = ({city, filteredOffers, authorizationStatus}: State) => ({
   city,
   filteredOffers,
+  authorizationStatus,
 });
 
 const connector = connect(mapStateToProps);
@@ -20,7 +23,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function Main (props: ConnectedComponentProps): JSX.Element {
-  const {city, filteredOffers} = props;
+  const {city, filteredOffers, authorizationStatus} = props;
 
   const [activeOfferId, setActiveOfferId] = useState<ActiveOfferId>({
     id: null,
@@ -62,18 +65,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </Link>
-                  </li>
-                  <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.SignIn}>
-                      <span className="header__signout">Sign out</span>
-                    </Link>
-                  </li>
+                  {authorizationStatus === AuthorizationStatus.Auth? <Logged/> : <NotLogged/>}
                 </ul>
               </nav>
             </div>
