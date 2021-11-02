@@ -1,4 +1,4 @@
-import {DEFAULT_CITY, AuthorizationStatus} from '../const';
+import {AuthorizationStatus, DEFAULT_CITY} from '../const';
 import {State} from '../types/state';
 import {Actions, ActionType} from '../types/action';
 import {getOffers} from '../utils';
@@ -9,6 +9,7 @@ const initialState = {
   filteredOffers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
+  email: null,
 };
 
 const reducer = (state: State = initialState, action: Actions) : State => {
@@ -42,8 +43,16 @@ const reducer = (state: State = initialState, action: Actions) : State => {
       };
     }
 
+    case ActionType.LoadEmail: {
+      const {email} = action.payload;
+      return {...state, email: email};
+    }
+
     case ActionType.RequireLogout:
-      return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
+      return {...state,
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        email: null,
+      };
 
     default:
       return {...state, offers: state.offers};

@@ -7,4 +7,5 @@ export type State = {
   filteredOffers: Offers,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
+  email: string | null,
 }

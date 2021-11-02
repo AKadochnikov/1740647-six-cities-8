@@ -69,6 +69,16 @@ const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
 
   return adaptedOffer;
 });
+//Todo Если хватить времени сделаю валидацию с всплывающим окном пока недогоняю что не так делаю, кажется надо делать управляемую форму.
+/*const checkPasswordValidation =  (item: HTMLInputElement) => {
+  const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
+  const passwordValue = item.value;
+  if (!regPassword.test(passwordValue)){
+    item.setCustomValidity('Please enter a two-digit password, letter and number');
+  }
+  item.reportValidity();
+  return item;
+};*/
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;

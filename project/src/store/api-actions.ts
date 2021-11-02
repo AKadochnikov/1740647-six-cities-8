@@ -1,6 +1,6 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, requireAuthorization, requireLogout} from './actions';
-import {saveToken, dropToken} from '../services/token';
+import {loadEmail, loadOffers, requireAuthorization, requireLogout} from './actions';
+import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {Offers} from '../types/types';
 import {AuthData} from '../types/auth-data';
@@ -17,8 +17,14 @@ export const fetchHotelsAction = (): ThunkActionResult =>
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     await api.get(APIRoute.Login)
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      .then((response) => {
+        //если удалить cookie приложение не грузится и вылетает ошибка что email undefined, а значит вместе с cookie мы почистили наш localStorage и токена у нас теперь нет
+        if (localStorage.getItem('user-token') !== null){
+          dispatch(requireAuthorization(AuthorizationStatus.Auth));
+          dispatch(loadEmail(response.data.email));
+        } else {
+          dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+        }
       });
   };
 
@@ -27,6 +33,7 @@ export const loginAction = ({login: email, password}: AuthData): ThunkActionResu
     const {data: {token}} = await api.post<{token: Token}>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(loadEmail(email));
   };
 
 

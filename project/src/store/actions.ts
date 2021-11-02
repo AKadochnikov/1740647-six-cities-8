@@ -35,4 +35,12 @@ const requireLogout = () => ({
   type: ActionType.RequireLogout,
 } as const);
 
-export {changeCity, changeOffers, mainReset, loadOffers, requireAuthorization, requireLogout};
+const loadEmail = (email: string) => ({
+  type: ActionType.LoadEmail,
+  payload: {
+    email,
+  },
+} as const);
+
+
+export {changeCity, changeOffers, mainReset, loadOffers, requireAuthorization, requireLogout, loadEmail};
