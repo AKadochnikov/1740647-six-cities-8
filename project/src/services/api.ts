@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {getToken} from './token';
 import {BACKEND_URL, REQUEST_TIME_OUT} from '../const';
-import {UnauthorizedCallback} from '../types/api-types';
+import {UnauthorizedCallback} from '../types/api';
 
 enum HttpCode {
   Unauthorized = 401,
@@ -20,7 +20,7 @@ export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       const {response} = error;
 
       if (response?.status === HttpCode.Unauthorized) {
-        return onUnauthorized();
+        onUnauthorized();
       }
 
       return Promise.reject(error);

@@ -1,4 +1,4 @@
-import {City, Offer} from './types/types';
+import {City, Offer, Offers} from './types/types';
 import {LOCATIONS} from './const';
 import {AuthorizationStatus} from './const';
 
@@ -17,23 +17,22 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptToClient = (offers: Offer[]): Offer[] => offers.map((offer) => {
-  const adaptedOffer = Object.assign(
-    {},
-    offer,
-    {
+const adaptOffersToClient = (offers: Offers) => offers.map((offer) => {
+  const adaptedOffer: Offer ={
+    ...offer,
+    ...{
       previewImage: offer['preview_image'],
       isFavorite: offer['is_favorite'],
       isPremium: offer['is_premium'],
       maxAdults: offer['max_adults'],
       host:{
-        id: offer.host.id,
+        id: offer.host['id'],
         isPro: offer.host['is_pro'],
-        name: offer.host.name,
+        name: offer.host['name'],
         avatarUrl: offer.host['avatar_url'],
       },
-    },
-  );
+    }};
+
 
   delete adaptedOffer['preview_image'];
   delete adaptedOffer['is_favorite'];
@@ -45,21 +44,21 @@ const adaptToClient = (offers: Offer[]): Offer[] => offers.map((offer) => {
   return adaptedOffer;
 });
 
-const adaptToServer = (offers: Offer[]): Offer[] => offers.map((offer) => {
-  const adaptedOffer = Object.assign(
-    {},
-    offer,
-    {
+const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
+  const adaptedOffer: Offer ={
+    ...offer,
+    ...{
       'preview_image': offer.previewImage,
       'is_favorite': offer.isFavorite,
       'is_premium': offer.isPremium,
       'max_adults': offer.maxAdults,
       host:{
+        'id': offer.host.id,
         'is_pro': offer.host.isPro,
+        'name': offer.host.name,
         'avatar_url': offer.host.avatarUrl,
       },
-    },
-  );
+    }};
 
   delete adaptedOffer.previewImage;
   delete adaptedOffer.isFavorite;
@@ -70,9 +69,19 @@ const adaptToServer = (offers: Offer[]): Offer[] => offers.map((offer) => {
 
   return adaptedOffer;
 });
+//Todo Если хватить времени сделаю валидацию с всплывающим окном пока недогоняю что не так делаю, кажется надо делать управляемую форму.
+/*const checkPasswordValidation =  (item: HTMLInputElement) => {
+  const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
+  const passwordValue = item.value;
+  if (!regPassword.test(passwordValue)){
+    item.setCustomValidity('Please enter a two-digit password, letter and number');
+  }
+  item.reportValidity();
+  return item;
+};*/
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getOffers, getLocation, adaptToClient, adaptToServer, isCheckedAuth};
+export {getRating, ucFirst, getOffers, getLocation, adaptOffersToClient, adaptOffersToServer, isCheckedAuth};
 

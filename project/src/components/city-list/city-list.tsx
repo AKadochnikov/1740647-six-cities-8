@@ -1,6 +1,6 @@
 import {CITIES} from '../../const';
 import {Dispatch} from '@reduxjs/toolkit';
-import {Actions} from '../../types/action-types';
+import {Actions} from '../../types/action';
 import {MouseEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import CityListTab from '../city-list-item/city-list-tab';

@@ -2,10 +2,10 @@ import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
 import {AppRoute} from '../../const';
-import {Offer} from '../../types/types';
+import {Offers} from '../../types/types';
 
 type favoritesProps = {
-  offers: Offer[];
+  offers: Offers;
 }
 
 function Favorites({offers}: favoritesProps):JSX.Element {

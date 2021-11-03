@@ -43,3 +43,5 @@ export type Offer = {
   'is_premium'?: boolean,
   'max_adults'?: number,
 }
+
+export type Offers = Offer[];

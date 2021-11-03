@@ -9,8 +9,10 @@ import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {requireAuthorization} from './store/actions';
 import {AuthorizationStatus} from './const';
-import {ThunkAppDispatch} from './types/action-types';
+import {ThunkAppDispatch} from './types/action';
 import {checkAuthAction, fetchHotelsAction} from './store/api-actions';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainSetting = {
   OFFERS: [],
@@ -28,6 +30,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk.wit
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App
         offers={MainSetting.OFFERS}
       />
