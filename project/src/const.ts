@@ -1,5 +1,3 @@
-import {layerGroup} from 'leaflet';
-
 const AUTH_TOKEN_KEY_NAME = 'user-token';
 const BACKEND_URL = 'https://8.react.pages.academy/six-cities';
 const REQUEST_TIME_OUT = 5000;
@@ -7,7 +5,6 @@ const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseld
 const DEFAULT_CITY = 'Paris';
 const MARKER_DEFAULT = './img/pin.svg';
 const MARKER_CURRENT = './img/pin-active.svg';
-const LAYERS = layerGroup();
 const AUTH_FAIL_MESSAGE = 'Please do not forget to log in';
 
 enum AppRoute {
@@ -97,5 +94,5 @@ const LOCATIONS = [
   },
 ];
 
-export {AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, LAYERS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE};
+export {AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE};
 
