@@ -11,14 +11,16 @@ import {Offers} from '../../types/types';
 import Loading from '../loading/loading';
 import {isCheckedAuth} from '../../utils';
 import {State} from '../../types/state';
+import {getAuthorizationStatus} from '../../store/authorization/selectors';
+import {getIsDataLoading} from '../../store/data/selectors';
 
 type AppProps = {
   offers: Offers;
 }
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
-  authorizationStatus,
-  isDataLoaded,
+const mapStateToProps = (state: State) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getIsDataLoading(state),
 });
 
 const connector = connect(mapStateToProps);

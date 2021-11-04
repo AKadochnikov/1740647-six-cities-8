@@ -2,18 +2,20 @@ import Logo from '../logo/logo';
 import Map from '../map/map';
 import CardList from '../card-list/card-list';
 import {AuthorizationStatus} from '../../const';
-import {useState} from 'react';
-import {ActiveOfferId} from '../../types/types';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
+import {useActiveOffer} from '../../hooks/useActiveOffer';
+import {getCity, getFilteredOffers} from '../../store/data/selectors';
+import {getAuthorizationStatus} from '../../store/authorization/selectors';
 
-const mapStateToProps = ({city, filteredOffers, authorizationStatus}: State) => ({
-  city,
-  filteredOffers,
-  authorizationStatus,
+
+const mapStateToProps = (state: State) => ({
+  city: getCity(state),
+  filteredOffers: getFilteredOffers(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const connector = connect(mapStateToProps);
@@ -24,17 +26,7 @@ type ConnectedComponentProps = PropsFromRedux;
 function Main (props: ConnectedComponentProps): JSX.Element {
   const {city, filteredOffers, authorizationStatus} = props;
 
-  const [activeOfferId, setActiveOfferId] = useState<ActiveOfferId>({
-    id: null,
-  });
-
-  const handleOfferMouseEnter = (id: number) => {
-    setActiveOfferId({id});
-  };
-
-  const handleOfferMouseLeave = () => {
-    setActiveOfferId({id: null});
-  };
+  const [handleOfferMouseEnter, handleOfferMouseLeave, activeOfferId] = useActiveOffer();
 
   return (
     <>

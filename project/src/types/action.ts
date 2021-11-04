@@ -1,4 +1,4 @@
-import {changeOffers, changeCity, mainReset, loadOffers, requireAuthorization, requireLogout, loadEmail} from '../store/actions';
+import {changeOffers, changeCity, loadOffers, requireAuthorization, requireLogout, loadEmail} from '../store/actions';
 import {ThunkAction, ThunkDispatch} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {State} from './state';
@@ -6,7 +6,6 @@ import {State} from './state';
 export enum ActionType {
   ChangeCity = 'main/changeCity',
   ChangeOffers = 'main/changeOffers',
-  MainReset = 'main/reset',
   LoadOffers = 'data/loadOffers',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
@@ -16,7 +15,6 @@ export enum ActionType {
 export type Actions =
   ReturnType<typeof changeOffers>
   | ReturnType<typeof changeCity>
-  | ReturnType<typeof mainReset>
   | ReturnType<typeof loadOffers>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>

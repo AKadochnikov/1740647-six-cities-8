@@ -4,7 +4,7 @@ import {Actions} from '../../types/action';
 import {MouseEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import CityListTab from '../city-list-item/city-list-tab';
-import {changeCity, changeOffers} from '../../store/actions';
+import {changeCity} from '../../store/actions';
 
 type CityListProps = {
   city: string;
@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
     const newCity = evt.currentTarget.textContent;
     if (newCity && newCity !== city) {
       dispatch(changeCity(newCity));
-      dispatch(changeOffers());
     }
   },
 });

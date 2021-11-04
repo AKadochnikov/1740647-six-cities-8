@@ -2,13 +2,14 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
 
-type placeCardProps = {
+type PlaceCardProps = {
   offerItem: Offer;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function PlaceCard ({offerItem, onMouseEnter, onMouseLeave}: placeCardProps): JSX.Element {
+function PlaceCard (props: PlaceCardProps): JSX.Element {
+  const {offerItem, onMouseEnter, onMouseLeave} = props;
   const {isPremium, previewImage, price, rating, title, type, isFavorite, id} = offerItem;
   return (
     <article className="cities__place-card place-card"

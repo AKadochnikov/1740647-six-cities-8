@@ -2,20 +2,21 @@ import {useEffect, useRef} from 'react';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import {Icon, Marker} from 'leaflet';
-import {LAYERS, URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
+import {LAYERS, MARKER_CURRENT, MARKER_DEFAULT} from '../../const';
 import {ActiveOfferId} from '../../types/types';
 import {getLocation} from '../../utils';
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
+import {getCity, getFilteredOffers} from '../../store/data/selectors';
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
@@ -24,9 +25,9 @@ type mapProps = {
   activeOffer: ActiveOfferId;
 }
 
-const mapStateToProps = ({city, filteredOffers}: State) => ({
-  city,
-  filteredOffers,
+const mapStateToProps = (state: State) => ({
+  city: getCity(state),
+  filteredOffers: getFilteredOffers(state),
 });
 
 const connector = connect(mapStateToProps);

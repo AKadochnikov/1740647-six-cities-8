@@ -4,9 +4,10 @@ import {AppRoute} from '../../const';
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
 import {logoutAction} from '../../store/api-actions';
+import {getEmail} from '../../store/authorization/selectors';
 
-const mapStateToProps = ({email}: State) => ({
-  email,
+const mapStateToProps = (state: State) => ({
+  email: getEmail(state),
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

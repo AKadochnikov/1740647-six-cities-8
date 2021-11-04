@@ -13,10 +13,6 @@ const changeOffers = () => ({
   type: ActionType.ChangeOffers,
 } as const);
 
-const mainReset = () => ({
-  type: ActionType.MainReset,
-} as const);
-
 const loadOffers = (offers: Offers) => ({
   type: ActionType.LoadOffers,
   payload: {
@@ -43,4 +39,4 @@ const loadEmail = (email: string) => ({
 } as const);
 
 
-export {changeCity, changeOffers, mainReset, loadOffers, requireAuthorization, requireLogout, loadEmail};
+export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail};
