@@ -11,7 +11,7 @@ import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
 import {Offers} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
-import {adaptOffersToClient, adaptOfferToClient} from '../utils';
+import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
 import {toast} from 'react-toastify';
 
 export const fetchHotelsAction = (): ThunkActionResult =>
@@ -59,7 +59,7 @@ export const fetchPropertyDataAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     dispatch(resetPropertyData());
     const activeOffer = await api.get(`/hotels/${id}`).then((response) => adaptOfferToClient(response.data));
-    const comments = await api.get(`/comments/${id}`).then((response) => response.data);
+    const comments = await api.get(`/comments/${id}`).then((response) => adaptCommentsToClient(response.data));
     const nearbyOffers = await api.get(`/hotels/${id}/nearby`).then((response) => adaptOffersToClient(response.data));
     dispatch(loadPropertyData(activeOffer, comments, nearbyOffers));
   };

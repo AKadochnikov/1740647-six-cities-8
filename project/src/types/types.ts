@@ -53,7 +53,7 @@ export type Comment = {
    'avatar_url'?: string,
     avatarUrl?: string,
     id: number,
-    'is_pro'?: false,
+    'is_pro'?: boolean,
     isPro?: boolean,
     name: string,
 }

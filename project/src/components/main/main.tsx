@@ -108,7 +108,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                 </section>}
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map activeOffer={activeOfferId}/>
+                  <Map activeOffer={activeOfferId} offers={filteredOffers}/>
                 </section>
               </div>
             </div>

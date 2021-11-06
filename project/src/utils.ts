@@ -1,4 +1,4 @@
-import {City, Offer, Offers} from './types/types';
+import {City, Comments, Offer, Offers, Comment} from './types/types';
 import {LOCATIONS} from './const';
 import {AuthorizationStatus} from './const';
 
@@ -46,6 +46,24 @@ const adaptOfferToClient = (offer: Offer) => {
 
 const adaptOffersToClient = (offers: Offers) => offers.map((offer) => adaptOfferToClient(offer));
 
+const adaptCommentsToClient = (comments: Comments) => comments.map((commentItem) => {
+  const adaptedComment: Comment ={
+    ...commentItem,
+    ...{
+      user:{
+        id: commentItem.user['id'],
+        isPro: commentItem.user['is_pro'],
+        name: commentItem.user['name'],
+        avatarUrl: commentItem.user['avatar_url'],
+      },
+    }};
+
+  delete adaptedComment.user['is_pro'];
+  delete adaptedComment.user['avatar_url'];
+
+  return adaptedComment;
+});
+
 const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
   const adaptedOffer: Offer ={
     ...offer,
@@ -71,19 +89,11 @@ const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
 
   return adaptedOffer;
 });
-//Todo Если хватить времени сделаю валидацию с всплывающим окном пока недогоняю что не так делаю, кажется надо делать управляемую форму.
-/*const checkPasswordValidation =  (item: HTMLInputElement) => {
-  const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
-  const passwordValue = item.value;
-  if (!regPassword.test(passwordValue)){
-    item.setCustomValidity('Please enter a two-digit password, letter and number');
-  }
-  item.reportValidity();
-  return item;
-};*/
+
+const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {month: 'long', year: 'numeric'});
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth};
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate};
 

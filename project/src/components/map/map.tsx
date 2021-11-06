@@ -3,11 +3,11 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import {MARKER_CURRENT, MARKER_DEFAULT} from '../../const';
-import {ActiveOfferId} from '../../types/types';
+import {ActiveOfferId, Offers} from '../../types/types';
 import {getLocation} from '../../utils';
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
-import {getCity, getFilteredOffers} from '../../store/data/selectors';
+import {getCity, getFilteredOffers, getNearbyOffers} from '../../store/data/selectors';
 import {useMemo} from 'react';
 
 const currentCustomIcon = new Icon({
@@ -24,11 +24,11 @@ const defaultCustomIcon = new Icon({
 
 type mapProps = {
   activeOffer: ActiveOfferId;
+  offers: Offers;
 }
 
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
-  filteredOffers: getFilteredOffers(state),
 });
 
 const connector = connect(mapStateToProps);
@@ -38,7 +38,7 @@ type ConnectedComponentProps = PropsFromRedux & mapProps;
 
 function Map (props: ConnectedComponentProps):JSX.Element {
   const mapRef = useRef(null);
-  const {activeOffer, city, filteredOffers} = props;
+  const {activeOffer, city, offers} = props;
   const currentCity= getLocation(city);
   const map = useMap(mapRef, currentCity);
   const layers = useMemo(() => layerGroup(), []);
@@ -50,8 +50,8 @@ function Map (props: ConnectedComponentProps):JSX.Element {
   useEffect(() => {
     if (map) {
       layers.clearLayers();
-      if (filteredOffers.length > 0) {
-        filteredOffers.forEach((offer) => {
+      if (offers.length > 0) {
+        offers.forEach((offer) => {
           const marker = new Marker({
             lat: offer.location.latitude,
             lng: offer.location.longitude,
@@ -63,7 +63,7 @@ function Map (props: ConnectedComponentProps):JSX.Element {
       }
       map.addLayer(layers);
     }
-  }, [map, filteredOffers, activeOffer, city]);
+  }, [map, offers, activeOffer, city]);
 
   return <div style={{height: '100%'}} ref={mapRef}/>;
 }
