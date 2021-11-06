@@ -1,25 +1,25 @@
 import {useEffect, useRef} from 'react';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import {Icon, LayerGroup, layerGroup, Marker} from 'leaflet';
+import {Icon, layerGroup, Marker} from 'leaflet';
 import {MARKER_CURRENT, MARKER_DEFAULT} from '../../const';
 import {ActiveOfferId} from '../../types/types';
 import {getLocation} from '../../utils';
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
 import {getCity, getFilteredOffers} from '../../store/data/selectors';
-import {useState} from 'react';
+import {useMemo} from 'react';
 
 const currentCustomIcon = new Icon({
   iconUrl: MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 });
 
 const defaultCustomIcon = new Icon({
   iconUrl: MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 });
 
 type mapProps = {
@@ -41,7 +41,7 @@ function Map (props: ConnectedComponentProps):JSX.Element {
   const {activeOffer, city, filteredOffers} = props;
   const currentCity= getLocation(city);
   const map = useMap(mapRef, currentCity);
-  const [layers] = useState<LayerGroup>(layerGroup());
+  const layers = useMemo(() => layerGroup(), []);
 
   useEffect(()=> {
     map?.flyTo([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);

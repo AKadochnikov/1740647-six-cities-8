@@ -11,7 +11,6 @@ import {useActiveOffer} from '../../hooks/useActiveOffer';
 import {getCity, getFilteredOffers} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 
-
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
   filteredOffers: getFilteredOffers(state),
