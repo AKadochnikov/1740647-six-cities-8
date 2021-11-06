@@ -1,13 +1,15 @@
 import PlaceCard from '../place-card/place-card';
 import {Offers, Offer} from '../../types/types';
+import {memo} from 'react';
 
-type cardListProps = {
+type CardListProps = {
   offers: Offers
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-function CardList ({offers, onMouseLeave, onMouseEnter}: cardListProps): JSX.Element {
+function CardList (props: CardListProps): JSX.Element {
+  const {offers, onMouseEnter, onMouseLeave} = props;
   return (
     <>
       {offers.map((offerItem: Offer) => (
@@ -22,4 +24,4 @@ function CardList ({offers, onMouseLeave, onMouseEnter}: cardListProps): JSX.Ele
   );
 }
 
-export default CardList;
+export default memo(CardList);

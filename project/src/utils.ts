@@ -10,7 +10,7 @@ const ucFirst = (str: string): string => {
 };
 const getRating = (rating: number): number => (rating * 10) * 2;
 
-const getOffers = (currentCity: string, currentOffer: Offer) => currentOffer.city.name === currentCity;
+const getFilteredOffers = (currentCity: string, offers: Offers) => offers.slice().filter((offerItem) => offerItem.city.name === currentCity);
 
 const getLocation = (currentCity: string): City => {
   const newLocation = LOCATIONS.filter((currentLocation) => currentLocation.city.name === currentCity);
@@ -83,5 +83,5 @@ const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getOffers, getLocation, adaptOffersToClient, adaptOffersToServer, isCheckedAuth};
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOffersToServer, isCheckedAuth};
 

@@ -8,6 +8,8 @@ import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 import {State} from '../../types/state';
 import {AuthorizationStatus} from '../../const';
+import {getCity} from '../../store/data/selectors';
+import {getAuthorizationStatus} from '../../store/authorization/selectors';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -15,9 +17,9 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   },
 });
 
-const mapStateToProps = ({city, authorizationStatus}: State) => ({
-  city,
-  authorizationStatus,
+const mapStateToProps = (state: State) => ({
+  city: getCity(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
