@@ -1,28 +1,61 @@
 import Logo from '../logo/logo';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
-import {Offers} from '../../types/types';
 import {getRating, ucFirst} from '../../utils';
+import {ThunkAppDispatch} from '../../types/action';
+import {fetchPropertyDataAction} from '../../store/api-actions';
+import {State} from '../../types/state';
+import {getCity, getActiveOffer, getComments, getNearbyOffers, getIsPropertyDataLoaded} from '../../store/data/selectors';
+import {getAuthorizationStatus} from '../../store/authorization/selectors';
+import {connect, ConnectedProps} from 'react-redux';
+import {useEffect} from 'react';
+import Loading from '../loading/loading';
 
-type propertyProps = {
-  offers: Offers;
-}
 
-type paramsProps = {
+type Params = {
   id: string;
 }
 
-function Property ({offers}: propertyProps): JSX.Element {
-  const params: paramsProps = useParams();
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchPropertyData(id: number) {
+    dispatch(fetchPropertyDataAction(id));
+  },
+});
+
+const mapStateToProps = (state: State) => ({
+  city: getCity(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  activeOffer: getActiveOffer(state),
+  comments: getComments(state),
+  nearbyOffers: getNearbyOffers(state),
+  isPropertyDataLoaded: getIsPropertyDataLoaded(state),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function Property (props: PropsFromRedux): JSX.Element {
+  const {fetchPropertyData, activeOffer, comments, nearbyOffers, isPropertyDataLoaded} = props;
+  const params: Params = useParams();
   const currentId = Number(params.id);
-  const currentIndex = offers.findIndex((offerItem) => offerItem.id === currentId);
-  const currentOffer = offers[currentIndex];
-  const newOffers = offers.slice();
-  newOffers.splice(currentIndex, 1);
-  const {images, isPremium, title, bedrooms, rating, isFavorite, type, maxAdults, price, goods, host, description} = currentOffer;
+
+  useEffect(() => fetchPropertyData(currentId), [currentId, fetchPropertyData]);
+
+  if (!isPropertyDataLoaded) {
+    return (
+      <Loading/>
+    );
+  }
+
+  if(activeOffer === null) {
+    return (<Redirect to={AppRoute.NotFound}/>);
+  }
+
+  const {images, isPremium, title, bedrooms, rating, isFavorite, type, maxAdults, price, goods, host, description} = activeOffer;
 
   return (
     <div>
@@ -139,7 +172,7 @@ function Property ({offers}: propertyProps): JSX.Element {
                       <div className="reviews__info">
                         <div className="reviews__rating rating">
                           <div className="reviews__stars rating__stars">
-                            <span style={{width: '80%'}} />
+                            <span style={{width: `${getRating(rating)}%`}} />
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>
@@ -160,7 +193,7 @@ function Property ({offers}: propertyProps): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesCardList offers={newOffers} />
+                <NearPlacesCardList offers={nearbyOffers} />
               </div>
             </section>
           </div>
@@ -169,4 +202,4 @@ function Property ({offers}: propertyProps): JSX.Element {
     </div>);
 }
 
-export default Property;
+export default connector(Property);

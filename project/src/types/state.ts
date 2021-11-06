@@ -1,4 +1,4 @@
-import {Offers} from './types';
+import {Offers, Offer, Comments} from './types';
 import {AuthorizationStatus} from '../const';
 import {RootState} from '../store/root-reducer';
 
@@ -11,6 +11,10 @@ export type Data = {
   city: string,
   offers: Offers,
   isDataLoaded: boolean,
+  activeOffer: Offer | null,
+  comments: Comments,
+  nearbyOffers: Offers,
+  isPropertyDataLoaded: boolean,
 }
 
 export type State = RootState;

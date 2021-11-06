@@ -17,7 +17,7 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptOffersToClient = (offers: Offers) => offers.map((offer) => {
+const adaptOfferToClient = (offer: Offer) => {
   const adaptedOffer: Offer ={
     ...offer,
     ...{
@@ -42,7 +42,9 @@ const adaptOffersToClient = (offers: Offers) => offers.map((offer) => {
   delete adaptedOffer.host['avatar_url'];
 
   return adaptedOffer;
-});
+};
+
+const adaptOffersToClient = (offers: Offers) => offers.map((offer) => adaptOfferToClient(offer));
 
 const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
   const adaptedOffer: Offer ={
@@ -83,5 +85,5 @@ const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOffersToServer, isCheckedAuth};
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth};
 
