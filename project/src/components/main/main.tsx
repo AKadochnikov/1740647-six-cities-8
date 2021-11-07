@@ -1,7 +1,7 @@
 import Logo from '../logo/logo';
 import Map from '../map/map';
 import CardList from '../card-list/card-list';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, IS_FAVORITES} from '../../const';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state';
@@ -96,6 +96,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                       onMouseEnter={handleOfferMouseEnter}
                       onMouseLeave={handleOfferMouseLeave}
                       offers={filteredOffers}
+                      isFavorites={IS_FAVORITES.not}
                     />
                   </div>
                 </section> :
