@@ -9,6 +9,11 @@ const AUTH_FAIL_MESSAGE = 'Please do not forget to log in';
 const COMMENTS_LIMIT = 10;
 const START = 0;
 
+const IS_FAVORITES = {
+  not: false,
+  yes: true,
+};
+
 enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -97,5 +102,5 @@ const LOCATIONS = [
   },
 ];
 
-export {AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, START};
+export {AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, START, IS_FAVORITES};
 

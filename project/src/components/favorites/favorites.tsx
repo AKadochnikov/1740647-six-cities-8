@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
 import {AppRoute} from '../../const';
 import {Offers} from '../../types/types';
+import {IS_FAVORITES} from '../../const';
 
 type favoritesProps = {
   offers: Offers;
@@ -48,11 +49,7 @@ function Favorites({offers}: favoritesProps):JSX.Element {
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 {[...Cities].map((city) => (
-                  <FavoritesList
-                    key={`${city}_1`}
-                    offers={offers}
-                    city={city}
-                  />
+                  <FavoritesList key={`${city}_1`} city={city} offers={offers} isFavorites={IS_FAVORITES.yes}/>
                 ))}
 
               </ul>

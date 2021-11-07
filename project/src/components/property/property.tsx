@@ -1,6 +1,6 @@
 import Logo from '../logo/logo';
 import {Link, Redirect} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, IS_FAVORITES} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
@@ -174,7 +174,7 @@ function Property (props: PropsFromRedux): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesCardList offers={nearbyOffers} isFavorites={false}/>
+                <NearPlacesCardList offers={nearbyOffers} isFavorites={IS_FAVORITES.not}/>
               </div>
             </section>
           </div>

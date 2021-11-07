@@ -6,9 +6,11 @@ import {Offers} from '../../types/types';
 type favoriteListProp = {
   city: string;
   offers: Offers;
+  isFavorites: boolean;
 }
 
-function FavoritesList({offers, city}: favoriteListProp):JSX.Element {
+function FavoritesList(props: favoriteListProp):JSX.Element {
+  const {city, offers, isFavorites} = props;
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -23,6 +25,7 @@ function FavoritesList({offers, city}: favoriteListProp):JSX.Element {
           <FavoritesCard
             offerItem={offerItem}
             key={offerItem.id}
+            isFavorites={isFavorites}
           />
         ))}
       </div>
