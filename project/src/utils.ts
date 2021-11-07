@@ -64,32 +64,6 @@ const adaptCommentsToClient = (comments: Comments) => comments.map((commentItem)
   return adaptedComment;
 });
 
-const adaptOffersToServer = (offers: Offers) => offers.map((offer) => {
-  const adaptedOffer: Offer ={
-    ...offer,
-    ...{
-      'preview_image': offer.previewImage,
-      'is_favorite': offer.isFavorite,
-      'is_premium': offer.isPremium,
-      'max_adults': offer.maxAdults,
-      host:{
-        'id': offer.host.id,
-        'is_pro': offer.host.isPro,
-        'name': offer.host.name,
-        'avatar_url': offer.host.avatarUrl,
-      },
-    }};
-
-  delete adaptedOffer.previewImage;
-  delete adaptedOffer.isFavorite;
-  delete adaptedOffer.isPremium;
-  delete adaptedOffer.maxAdults;
-  delete adaptedOffer.host.isPro;
-  delete adaptedOffer.host.avatarUrl;
-
-  return adaptedOffer;
-});
-
 const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {month: 'long', year: 'numeric'});
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>

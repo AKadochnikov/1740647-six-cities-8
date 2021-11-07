@@ -7,7 +7,7 @@ import {ActiveOfferId, Offers} from '../../types/types';
 import {getLocation} from '../../utils';
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
-import {getCity, getFilteredOffers, getNearbyOffers} from '../../store/data/selectors';
+import {getCity} from '../../store/data/selectors';
 import {useMemo} from 'react';
 
 const currentCustomIcon = new Icon({
