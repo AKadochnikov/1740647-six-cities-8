@@ -174,7 +174,7 @@ function Property (props: PropsFromRedux): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesCardList offers={nearbyOffers} />
+                <NearPlacesCardList offers={nearbyOffers} isFavorites={false}/>
               </div>
             </section>
           </div>
