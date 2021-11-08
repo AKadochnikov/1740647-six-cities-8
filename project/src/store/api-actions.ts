@@ -1,11 +1,17 @@
 import {ThunkActionResult} from '../types/action';
-import {loadEmail, loadOffers, requireAuthorization, requireLogout} from './actions';
+import {
+  loadEmail,
+  loadOffers,
+  requireAuthorization,
+  requireLogout,
+  loadPropertyData, resetPropertyData
+} from './actions';
 import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
 import {Offers} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
-import {adaptOffersToClient} from '../utils';
+import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
 import {toast} from 'react-toastify';
 
 export const fetchHotelsAction = (): ThunkActionResult =>
@@ -20,7 +26,6 @@ export const checkAuthAction = (): ThunkActionResult =>
     try {
       await api.get(APIRoute.Login)
         .then((response) => {
-        //если удалить cookie, приложение не грузится и вылетает ошибка что email undefined, а значит вместе с cookie мы почистили наш localStorage и токена у нас теперь нет
           if (localStorage.getItem('user-token') !== null){
             dispatch(requireAuthorization(AuthorizationStatus.Auth));
             dispatch(loadEmail(response.data.email));
@@ -48,4 +53,13 @@ export const logoutAction = (): ThunkActionResult =>
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireLogout());
+  };
+
+export const fetchPropertyDataAction = (id: number): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    dispatch(resetPropertyData());
+    const activeOffer = await api.get(`/hotels/${id}`).then((response) => adaptOfferToClient(response.data));
+    const comments = await api.get(`/comments/${id}`).then((response) => adaptCommentsToClient(response.data));
+    const nearbyOffers = await api.get(`/hotels/${id}/nearby`).then((response) => adaptOffersToClient(response.data));
+    dispatch(loadPropertyData(activeOffer, comments, nearbyOffers));
   };

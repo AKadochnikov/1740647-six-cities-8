@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action';
-import {Offers} from '../types/types';
+import {Offers, Offer, Comments} from '../types/types';
 import {AuthorizationStatus} from '../const';
 
 const changeCity = (city: string) => ({
@@ -38,5 +38,17 @@ const loadEmail = (email: string) => ({
   },
 } as const);
 
+const loadPropertyData = (offer: Offer, comments: Comments, nearbyOffers: Offers) => ({
+  type: ActionType.LoadPropertyData,
+  payload: {
+    offer,
+    comments,
+    nearbyOffers,
+  },
+} as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail};
+const resetPropertyData = () => ({
+  type: ActionType.ResetPropertyData,
+} as const);
+
+export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData};

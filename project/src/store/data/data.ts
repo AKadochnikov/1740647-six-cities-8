@@ -6,6 +6,10 @@ const initialState = {
   city: DEFAULT_CITY,
   offers: [],
   isDataLoaded: false,
+  activeOffer: null,
+  comments: [],
+  nearbyOffers: [],
+  isPropertyDataLoaded: false,
 };
 
 const data = (state: Data = initialState, action: Actions) : Data => {
@@ -22,6 +26,23 @@ const data = (state: Data = initialState, action: Actions) : Data => {
     case ActionType.ChangeCity:{
       const {city} = action.payload;
       return {...state, city: city};
+    }
+
+    case ActionType.LoadPropertyData:{
+      const {offer, comments, nearbyOffers} = action.payload;
+      return {...state,
+        activeOffer: offer,
+        comments: comments,
+        nearbyOffers: nearbyOffers,
+        isPropertyDataLoaded: true,
+      };
+    }
+
+    case ActionType.ResetPropertyData: {
+      return {...state,
+        activeOffer: null,
+        isPropertyDataLoaded: false,
+      };
     }
 
     default:

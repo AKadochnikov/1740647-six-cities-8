@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {memo} from 'react';
 
 function NotLogged(): JSX.Element {
   return (
@@ -12,5 +13,5 @@ function NotLogged(): JSX.Element {
   );
 }
 
-export default NotLogged;
+export default memo(NotLogged);
 

@@ -1,7 +1,7 @@
 import Logo from '../logo/logo';
 import Map from '../map/map';
 import CardList from '../card-list/card-list';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, IS_FAVORITES} from '../../const';
 import CityList from '../city-list/city-list';
 import {ConnectedProps, connect} from 'react-redux';
 import {State} from '../../types/state';
@@ -10,7 +10,6 @@ import NotLogged from '../not-logged/not-logged';
 import {useActiveOffer} from '../../hooks/useActiveOffer';
 import {getCity, getFilteredOffers} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
-
 
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
@@ -97,6 +96,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                       onMouseEnter={handleOfferMouseEnter}
                       onMouseLeave={handleOfferMouseLeave}
                       offers={filteredOffers}
+                      isFavorites={IS_FAVORITES.not}
                     />
                   </div>
                 </section> :
@@ -109,7 +109,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                 </section>}
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map activeOffer={activeOfferId}/>
+                  <Map activeOffer={activeOfferId} offers={filteredOffers}/>
                 </section>
               </div>
             </div>

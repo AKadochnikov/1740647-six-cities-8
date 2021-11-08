@@ -59,12 +59,10 @@ function App (props: ConnectedComponentProps): JSX.Element {
         </PrivateRoute>
 
         <Route exact path={AppRoute.Room}>
-          <Property
-            offers={offers}
-          />
+          <Property/>
         </Route>
 
-        <Route>
+        <Route exact path={AppRoute.NotFound}>
           <NotFound />
         </Route>
 
