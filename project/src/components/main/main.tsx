@@ -10,6 +10,8 @@ import NotLogged from '../not-logged/not-logged';
 import {useActiveOffer} from '../../hooks/useActiveOffer';
 import {getCity, getFilteredOffers} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
+import SortList from '../sort-list/sort-list';
+import {useState} from 'react';
 
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
@@ -24,8 +26,13 @@ type ConnectedComponentProps = PropsFromRedux;
 
 function Main (props: ConnectedComponentProps): JSX.Element {
   const {city, filteredOffers, authorizationStatus} = props;
+  const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const [handleOfferMouseEnter, handleOfferMouseLeave, activeOfferId] = useActiveOffer();
+
+  const handleOpenList = () => {
+    setIsOpened(!isOpened);
+  };
 
   return (
     <>
@@ -76,7 +83,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{filteredOffers.length} places to stay in {city}</b>
-                  <form className="places__sorting" action="#" method="get">
+                  <form onClick={() => handleOpenList()} className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex={0}>
                 Popular
@@ -84,12 +91,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                         <use xlinkHref="#icon-arrow-select"/>
                       </svg>
                     </span>
-                    <ul className="places__options places__options--custom places__options--opened">
-                      <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                      <li className="places__option" tabIndex={0}>Price: low to high</li>
-                      <li className="places__option" tabIndex={0}>Price: high to low</li>
-                      <li className="places__option" tabIndex={0}>Top rated first</li>
-                    </ul>
+                    <SortList isOpened={isOpened}/>
                   </form>
                   <div className="cities__places-list places__list tabs__content">
                     <CardList
