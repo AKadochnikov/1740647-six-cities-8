@@ -1,4 +1,4 @@
-import {City, Comment, CommentInServer, Offer, OfferInServer, Offers, SortBy} from './types/types';
+import {City, Comment, CommentFromServer, Offer, OfferFromServer, Offers, SortBy} from './types/types';
 import {AuthorizationStatus, LOCATIONS} from './const';
 
 const ucFirst = (str: string): string => {
@@ -16,7 +16,7 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptOfferToClient = (offer: OfferInServer): Offer => ({
+const adaptOfferToClient = (offer: OfferFromServer): Offer => ({
   bedrooms: offer.bedrooms,
   city: offer.city,
   description: offer.description,
@@ -44,9 +44,9 @@ const adaptOfferToClient = (offer: OfferInServer): Offer => ({
   type: offer.type,
 });
 
-const adaptOffersToClient = (offers: OfferInServer[]) => offers.map((offer) => adaptOfferToClient(offer));
+const adaptOffersToClient = (offers: OfferFromServer[]) => offers.map((offer) => adaptOfferToClient(offer));
 
-const adaptCommentsToClient = (comments: CommentInServer[]) => comments.map((commentItem): Comment => {
+const adaptCommentsToClient = (comments: CommentFromServer[]) => comments.map((commentItem): Comment => {
   const isPro: boolean = commentItem.user['is_pro'];
   const avatarUrl: string = commentItem.user['avatar_url'];
   const id: number = commentItem.user['id'];

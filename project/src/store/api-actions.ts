@@ -8,7 +8,7 @@ import {
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
-import {Offers, OfferInServer} from '../types/types';
+import {Offers, OfferFromServer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
 import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
@@ -16,7 +16,7 @@ import {toast} from 'react-toastify';
 
 export const fetchHotelsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<OfferInServer[]>(APIRoute.Hotels);
+    const {data} = await api.get<OfferFromServer[]>(APIRoute.Hotels);
     const adaptedData: Offers = adaptOffersToClient(data);
     dispatch(loadOffers(adaptedData));
   };

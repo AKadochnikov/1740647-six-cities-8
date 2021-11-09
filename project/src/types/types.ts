@@ -11,7 +11,7 @@ export type City = {
   name: string;
 }
 
-export type OfferInServer = {
+export type OfferFromServer = {
   bedrooms: number;
   city: City;
   description: string;
@@ -67,7 +67,7 @@ export type Offer = {
   type: string,
 }
 
-export type CommentInServer = {
+export type CommentFromServer = {
   comment: string,
   date: string,
   id: number,
