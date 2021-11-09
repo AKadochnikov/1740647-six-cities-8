@@ -1,6 +1,6 @@
-import {City, Comments, Offer, Offers, Comment} from './types/types';
-import {LOCATIONS} from './const';
-import {AuthorizationStatus} from './const';
+import {City, Comment, Comments, Offer, Offers} from './types/types';
+import {AuthorizationStatus, LOCATIONS} from './const';
+import {SortBy} from './types/types';
 
 const ucFirst = (str: string): string => {
   if (!str) {
@@ -69,5 +69,15 @@ const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {m
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate};
+const getSortValue = (sortItems: SortBy): string[] => {
+  const result: string[] = [];
+  for (const newKey in sortItems) {
+    const getKeyValue = <T extends SortBy, U extends keyof T>(key: U) => (obj: T) =>
+      obj[key];
+    result.push(getKeyValue(newKey)(sortItems));
+  }
+  return result;
+};
+
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue};
 

@@ -14,14 +14,12 @@ const IS_FAVORITES = {
   yes: true,
 };
 
-enum SortBy {
-  Popular = 'Popular',
-  LowToHigh = 'Price: low to high',
-  HighToLow = 'Price: high to low',
-  Top = 'Top rated first',
-}
-
-const SORT_BY = [SortBy.Popular, SortBy.LowToHigh, SortBy.HighToLow, SortBy.Top];
+const SORT_BY = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HighToLow: 'Price: high to low',
+  Top: 'Top rated first',
+};
 
 enum AppRoute {
   Main = '/',
@@ -111,5 +109,5 @@ const LOCATIONS = [
   },
 ];
 
-export {SortBy, AppRoute, AuthorizationStatus, APIRoute, NameSpace, SORT_BY, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, START, IS_FAVORITES};
+export {SORT_BY, AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, START, IS_FAVORITES};
 

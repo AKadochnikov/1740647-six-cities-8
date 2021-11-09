@@ -61,3 +61,4 @@ export type Comment = {
 
 export type Offers = Offer[];
 export type Comments = Comment[];
+export type SortBy = { [key: string]: string }
