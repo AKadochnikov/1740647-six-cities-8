@@ -4,19 +4,21 @@ import {getSortValue} from '../../utils';
 
 type SortListProp = {
   isOpened: boolean;
-  activeSortBy: string;
 }
 
 function SortList (props: SortListProp):JSX.Element {
-  const {isOpened, activeSortBy} = props;
+  const {isOpened} = props;
   const sortsList = getSortValue(SORT_BY);
   return (
     <ul className={`places__options places__options--custom ${isOpened? 'places__options--opened': ''}`}>
-      {sortsList.map((sortItem) => {
-        <SortItem activeSortBy={activeSortBy} sortItem={sortItem}/>;
-      })}
+      {sortsList.map((sortItem) => (
+        <SortItem
+          key={sortItem}
+          sortValue={sortItem}
+        />))}
     </ul>
   );
 }
+
 
 export default SortList;

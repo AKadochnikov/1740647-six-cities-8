@@ -8,14 +8,15 @@ import {State} from '../../types/state';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
 import {useActiveOffer} from '../../hooks/useActiveOffer';
-import {getCity, getFilteredOffers} from '../../store/data/selectors';
+import {getActiveSortBy, getCity, getSortedOffers} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import SortList from '../sort-list/sort-list';
 import {useState} from 'react';
 
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
-  filteredOffers: getFilteredOffers(state),
+  activeSortBy: getActiveSortBy(state),
+  filteredOffers: getSortedOffers(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 
@@ -25,7 +26,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function Main (props: ConnectedComponentProps): JSX.Element {
-  const {city, filteredOffers, authorizationStatus} = props;
+  const {city, filteredOffers, authorizationStatus, activeSortBy} = props;
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const [handleOfferMouseEnter, handleOfferMouseLeave, activeOfferId] = useActiveOffer();
@@ -86,7 +87,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                   <form onClick={() => handleOpenList()} className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex={0}>
-                Popular
+                      {activeSortBy}
                       <svg className="places__sorting-arrow" width={7} height={4}>
                         <use xlinkHref="#icon-arrow-select"/>
                       </svg>

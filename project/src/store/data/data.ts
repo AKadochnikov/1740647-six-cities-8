@@ -1,7 +1,6 @@
 import {Data} from '../../types/state';
 import {Actions, ActionType} from '../../types/action';
-import {DEFAULT_CITY} from '../../const';
-import {SORT_BY} from '../../const';
+import {DEFAULT_CITY, SORT_BY} from '../../const';
 
 const initialState = {
   city: DEFAULT_CITY,
@@ -45,6 +44,11 @@ const data = (state: Data = initialState, action: Actions) : Data => {
         activeOffer: null,
         isPropertyDataLoaded: false,
       };
+    }
+
+    case ActionType.ChangeActiveSortBy: {
+      const {sortItem} = action.payload;
+      return {...state, activeSortBy: sortItem};
     }
 
     default:

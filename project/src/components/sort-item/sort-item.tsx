@@ -1,11 +1,38 @@
+import {State} from '../../types/state';
+import {getActiveSortBy} from '../../store/data/selectors';
+import {connect, ConnectedProps} from 'react-redux';
+import {ThunkAppDispatch} from '../../types/action';
+import {changeActiveSortBy} from '../../store/actions';
+import {MouseEvent} from 'react';
+
 type SortItemProps = {
-  activeSortBy: string;
-  sortItem: string;
+  sortValue: string;
 }
 
-function SortItem (props: SortItemProps):JSX.Element {
-  const {activeSortBy, sortItem} = props;
-  return (<li className={`places__option ${activeSortBy === sortItem? 'places__option--active' : ''}`} tabIndex={0} >{sortItem}</li>);
-}
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onClickHandler(evt: MouseEvent) {
+    evt.preventDefault();
+    const newSortValue = evt.currentTarget.textContent;
+    if (newSortValue !== null) {
+      dispatch(changeActiveSortBy(newSortValue));
+    }
+  },
+});
 
-export default SortItem;
+const mapStateToProps = (state: State) => ({
+  activeSortBy: getActiveSortBy(state),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & SortItemProps;
+
+function SortItem (props: ConnectedComponentProps):JSX.Element {
+  const {sortValue, activeSortBy, onClickHandler} = props;
+  return (
+    <li onClick={(evt) => onClickHandler(evt)} className={`places__option ${activeSortBy === sortValue? 'places__option--active' : ''}`} tabIndex={0} value={sortValue}>{sortValue}</li>
+  );
+}
+export {SortItem};
+export default connector(SortItem);
