@@ -15,6 +15,7 @@ export type Data = {
   comments: Comments,
   nearbyOffers: Offers,
   isPropertyDataLoaded: boolean,
+  activeSortBy: string,
 }
 
 export type State = RootState;

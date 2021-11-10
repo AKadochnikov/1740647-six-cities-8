@@ -51,4 +51,11 @@ const resetPropertyData = () => ({
   type: ActionType.ResetPropertyData,
 } as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData};
+const changeActiveSortBy = (sortItem: string) => ({
+  type: ActionType.ChangeActiveSortBy,
+  payload: {
+    sortItem,
+  },
+} as const);
+
+export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy};

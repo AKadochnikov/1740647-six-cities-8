@@ -1,6 +1,5 @@
-import {City, Comments, Offer, Offers, Comment} from './types/types';
-import {LOCATIONS} from './const';
-import {AuthorizationStatus} from './const';
+import {City, Comment, CommentFromServer, Offer, OfferFromServer, Offers, SortBy} from './types/types';
+import {AuthorizationStatus, LOCATIONS} from './const';
 
 const ucFirst = (str: string): string => {
   if (!str) {
@@ -17,51 +16,52 @@ const getLocation = (currentCity: string): City => {
   return newLocation[0].city;
 };
 
-const adaptOfferToClient = (offer: Offer) => {
-  const adaptedOffer: Offer ={
-    ...offer,
-    ...{
-      previewImage: offer['preview_image'],
-      isFavorite: offer['is_favorite'],
-      isPremium: offer['is_premium'],
-      maxAdults: offer['max_adults'],
-      host:{
-        id: offer.host['id'],
-        isPro: offer.host['is_pro'],
-        name: offer.host['name'],
-        avatarUrl: offer.host['avatar_url'],
-      },
-    }};
+const adaptOfferToClient = (offer: OfferFromServer): Offer => ({
+  bedrooms: offer.bedrooms,
+  city: offer.city,
+  description: offer.description,
+  goods: offer.goods,
+  host: {
+    avatarUrl: offer.host.avatar_url,
+    id: offer.host.id,
+    isPro: offer.host.is_pro,
+    name: offer.host.name,
+  },
+  id: offer.id,
+  images: offer.images,
+  isFavorite: offer.is_favorite,
+  isPremium: offer.is_premium,
+  location: {
+    latitude: offer.location.latitude,
+    longitude: offer.location.longitude,
+    zoom: offer.location.zoom,
+  },
+  maxAdults: offer.max_adults,
+  previewImage: offer.preview_image,
+  price: offer.price,
+  rating: offer.rating,
+  title: offer.title,
+  type: offer.type,
+});
 
+const adaptOffersToClient = (offers: OfferFromServer[]) => offers.map((offer) => adaptOfferToClient(offer));
 
-  delete adaptedOffer['preview_image'];
-  delete adaptedOffer['is_favorite'];
-  delete adaptedOffer['is_premium'];
-  delete adaptedOffer['max_adults'];
-  delete adaptedOffer.host['is_pro'];
-  delete adaptedOffer.host['avatar_url'];
-
-  return adaptedOffer;
-};
-
-const adaptOffersToClient = (offers: Offers) => offers.map((offer) => adaptOfferToClient(offer));
-
-const adaptCommentsToClient = (comments: Comments) => comments.map((commentItem) => {
-  const adaptedComment: Comment ={
+const adaptCommentsToClient = (comments: CommentFromServer[]) => comments.map((commentItem): Comment => {
+  const isPro: boolean = commentItem.user['is_pro'];
+  const avatarUrl: string = commentItem.user['avatar_url'];
+  const id: number = commentItem.user['id'];
+  const name: string = commentItem.user['name'];
+  return {
     ...commentItem,
     ...{
-      user:{
-        id: commentItem.user['id'],
-        isPro: commentItem.user['is_pro'],
-        name: commentItem.user['name'],
-        avatarUrl: commentItem.user['avatar_url'],
+      user: {
+        id: id,
+        isPro: isPro,
+        name: name,
+        avatarUrl: avatarUrl,
       },
-    }};
-
-  delete adaptedComment.user['is_pro'];
-  delete adaptedComment.user['avatar_url'];
-
-  return adaptedComment;
+    },
+  };
 });
 
 const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {month: 'long', year: 'numeric'});
@@ -69,5 +69,15 @@ const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {m
 const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate};
+const getSortValue = (sortItems: SortBy): string[] => {
+  const result: string[] = [];
+  for (const newKey in sortItems) {
+    const getKeyValue = <T extends SortBy, U extends keyof T>(key: U) => (obj: T) =>
+      obj[key];
+    result.push(getKeyValue(newKey)(sortItems));
+  }
+  return result;
+};
+
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue};
 
