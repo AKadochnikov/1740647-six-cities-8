@@ -8,7 +8,7 @@ import {getRating, ucFirst} from '../../utils';
 import {ThunkAppDispatch} from '../../types/action';
 import {fetchPropertyDataAction} from '../../store/api-actions';
 import {State} from '../../types/state';
-import {getCity, getActiveOffer, getComments, getNearbyOffers, getIsPropertyDataLoaded, getSortedComments} from '../../store/data/selectors';
+import {getCity, getActiveOffer, getNearbyOffers, getIsPropertyDataLoaded, getSortedComments} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {connect, ConnectedProps} from 'react-redux';
 import {useEffect} from 'react';
