@@ -4,11 +4,11 @@ import {
   loadOffers,
   requireAuthorization,
   requireLogout,
-  loadPropertyData, resetPropertyData
+  loadPropertyData, resetPropertyData, refreshComments
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
-import {Offers, OfferFromServer} from '../types/types';
+import {Offers, OfferFromServer, PostComment, Comments} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
 import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
@@ -62,4 +62,10 @@ export const fetchPropertyDataAction = (id: number): ThunkActionResult =>
     const comments = await api.get(`/comments/${id}`).then((response) => adaptCommentsToClient(response.data));
     const nearbyOffers = await api.get(`/hotels/${id}/nearby`).then((response) => adaptOffersToClient(response.data));
     dispatch(loadPropertyData(activeOffer, comments, nearbyOffers));
+  };
+
+export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const comments = await api.post(`${APIRoute.PostComment}${id}`, {comment, rating}).then((response): Comments => adaptCommentsToClient(response.data));
+    dispatch(refreshComments(comments));
   };

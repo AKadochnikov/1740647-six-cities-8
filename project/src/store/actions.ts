@@ -47,6 +47,13 @@ const loadPropertyData = (offer: Offer, comments: Comments, nearbyOffers: Offers
   },
 } as const);
 
+const refreshComments = (comments: Comments) => ({
+  type: ActionType.RefreshComments,
+  payload: {
+    comments,
+  },
+} as const);
+
 const resetPropertyData = () => ({
   type: ActionType.ResetPropertyData,
 } as const);
@@ -58,4 +65,4 @@ const changeActiveSortBy = (sortItem: string) => ({
   },
 } as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy};
+export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments};

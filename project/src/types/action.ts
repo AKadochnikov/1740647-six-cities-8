@@ -1,4 +1,4 @@
-import {changeOffers, changeCity, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy} from '../store/actions';
+import {changeOffers, changeCity, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments} from '../store/actions';
 import {ThunkAction, ThunkDispatch} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {State} from './state';
@@ -13,6 +13,7 @@ export enum ActionType {
   LoadPropertyData = 'property/loadPropertyData',
   ResetPropertyData = 'property/resetPropertyData',
   ChangeActiveSortBy = 'sort/changeActiveSortBy',
+  RefreshComments = 'post/refreshComments'
 }
 
 export type Actions =
@@ -24,7 +25,8 @@ export type Actions =
   | ReturnType<typeof loadEmail>
   | ReturnType<typeof loadPropertyData>
   | ReturnType<typeof resetPropertyData>
-  | ReturnType<typeof changeActiveSortBy>;
+  | ReturnType<typeof changeActiveSortBy>
+  | ReturnType<typeof refreshComments>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 

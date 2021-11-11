@@ -13,6 +13,11 @@ export const getNearbyOffers = (state: State): Offers => state[NameSpace.data].n
 export const getIsPropertyDataLoaded = (state: State): boolean => state[NameSpace.data].isPropertyDataLoaded;
 export const getActiveSortBy = (state: State): string => state[NameSpace.data].activeSortBy;
 
+export const getSortedComments = createSelector(
+  [getComments],
+  (comments: Comments) => comments.slice().sort((commentA, commentB) => Date.parse(commentB.date) - Date.parse(commentA.date)),
+);
+
 export const getFilteredOffers = createSelector(
   [getOffers, getCity],
   (offers, city) => offers.slice().filter((offerItem) => offerItem.city.name === city),

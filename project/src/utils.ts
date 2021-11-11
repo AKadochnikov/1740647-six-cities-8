@@ -1,4 +1,4 @@
-import {City, Comment, CommentFromServer, Offer, OfferFromServer, Offers, SortBy} from './types/types';
+import {City, Comment, CommentFromServer, Comments, Offer, OfferFromServer, Offers, SortBy} from './types/types';
 import {AuthorizationStatus, LOCATIONS} from './const';
 
 const ucFirst = (str: string): string => {

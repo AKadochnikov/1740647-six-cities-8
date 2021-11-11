@@ -1,6 +1,6 @@
 import {Comments} from '../../types/types';
 import ReviewItem from '../review-item/review-item';
-import {COMMENTS_LIMIT, START} from '../../const';
+import {COMMENTS_LIMIT} from '../../const';
 
 type ReviewsListProps = {
   comments: Comments
@@ -10,8 +10,7 @@ function ReviewsList (props: ReviewsListProps): JSX.Element {
   const {comments} = props;
   let readyComments = comments;
   if (comments.length > COMMENTS_LIMIT) {
-    const count = comments.length - COMMENTS_LIMIT;
-    readyComments = comments.splice(START, count);
+    readyComments = comments.splice(COMMENTS_LIMIT);
   }
   return (
     <>
