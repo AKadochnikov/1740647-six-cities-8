@@ -51,6 +51,11 @@ const data = (state: Data = initialState, action: Actions) : Data => {
       return {...state, activeSortBy: sortItem};
     }
 
+    case ActionType.RefreshComments: {
+      const {comments} = action.payload;
+      return {...state, comments: comments};
+    }
+
     default:
       return state;
   }

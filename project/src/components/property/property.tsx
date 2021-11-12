@@ -1,6 +1,6 @@
 import Logo from '../logo/logo';
-import {Link, Redirect} from 'react-router-dom';
-import {AppRoute, IS_FAVORITES} from '../../const';
+import {Redirect} from 'react-router-dom';
+import {AppRoute, IS_FAVORITES, AuthorizationStatus} from '../../const';
 import FormReview from '../form-review/form-review';
 import {useParams} from 'react-router-dom';
 import NearPlacesCardList from '../near-places-card-list/near-places-card-list';
@@ -8,13 +8,15 @@ import {getRating, ucFirst} from '../../utils';
 import {ThunkAppDispatch} from '../../types/action';
 import {fetchPropertyDataAction} from '../../store/api-actions';
 import {State} from '../../types/state';
-import {getCity, getActiveOffer, getComments, getNearbyOffers, getIsPropertyDataLoaded} from '../../store/data/selectors';
+import {getCity, getActiveOffer, getNearbyOffers, getIsPropertyDataLoaded, getSortedComments} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {connect, ConnectedProps} from 'react-redux';
 import {useEffect} from 'react';
 import Loading from '../loading/loading';
 import ReviewsList from '../reviews-list/reviews-list';
 import Map from '../map/map';
+import Logged from '../logged/logged';
+import NotLogged from '../not-logged/not-logged';
 
 
 type Params = {
@@ -31,7 +33,7 @@ const mapStateToProps = (state: State) => ({
   city: getCity(state),
   authorizationStatus: getAuthorizationStatus(state),
   activeOffer: getActiveOffer(state),
-  comments: getComments(state),
+  comments: getSortedComments(state),
   nearbyOffers: getNearbyOffers(state),
   isPropertyDataLoaded: getIsPropertyDataLoaded(state),
 });
@@ -41,7 +43,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function Property (props: PropsFromRedux): JSX.Element {
-  const {fetchPropertyData, activeOffer, comments, nearbyOffers, isPropertyDataLoaded} = props;
+  const {fetchPropertyData, activeOffer, comments, nearbyOffers, isPropertyDataLoaded, authorizationStatus} = props;
   const params: Params = useParams();
   const currentId = Number(params.id);
 
@@ -74,18 +76,7 @@ function Property (props: PropsFromRedux): JSX.Element {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </Link>
-                  </li>
-                  <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.Main}>
-                      <span className="header__signout">Sign out</span>
-                    </Link>
-                  </li>
+                  {authorizationStatus === AuthorizationStatus.Auth? <Logged/> : <NotLogged/>}
                 </ul>
               </nav>
             </div>
@@ -162,7 +153,7 @@ function Property (props: PropsFromRedux): JSX.Element {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList comments={comments}/>
-                  <FormReview/>
+                  {authorizationStatus === AuthorizationStatus.Auth? <FormReview id={currentId}/> : ''}
                 </section>
               </div>
             </div>
