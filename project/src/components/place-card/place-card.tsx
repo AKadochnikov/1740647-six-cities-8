@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Offer} from '../../types/types';
+import {Offer, Offers} from '../../types/types';
 import Card from '../card/card';
 
 type PlaceCardProps = {
@@ -7,10 +7,11 @@ type PlaceCardProps = {
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
   isFavorites: boolean;
+  offers: Offers
 }
 
 function PlaceCard (props: PlaceCardProps): JSX.Element {
-  const {offerItem, onMouseEnter, onMouseLeave, isFavorites} = props;
+  const {offerItem, onMouseEnter, onMouseLeave, isFavorites, offers} = props;
   const {isPremium, previewImage,id} = offerItem;
   return (
     <article className="cities__place-card place-card"
@@ -23,7 +24,7 @@ function PlaceCard (props: PlaceCardProps): JSX.Element {
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </Link>
       </div>
-      <Card offer={offerItem} isFavorites={isFavorites}/>
+      <Card offer={offerItem} isFavorites={isFavorites} offers={offers}/>
     </article>);
 }
 

@@ -26,6 +26,7 @@ function FavoritesList(props: favoriteListProp):JSX.Element {
             offerItem={offerItem}
             key={offerItem.id}
             isFavorites={isFavorites}
+            offers={offers}
           />
         ))}
       </div>

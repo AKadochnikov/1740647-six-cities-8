@@ -20,6 +20,7 @@ function CardList (props: CardListProps): JSX.Element {
           key={offerItem.id}
           offerItem={offerItem}
           isFavorites={isFavorites}
+          offers={offers}
         />
       ))}
     </>

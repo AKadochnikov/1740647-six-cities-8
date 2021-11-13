@@ -15,6 +15,7 @@ function NearPlacesCardList(props: nearPlacesCardListProps): JSX.Element {
           key={offerItem.id}
           offerItem={offerItem}
           isFavorites={isFavorites}
+          offers={offers}
         />
       ))}
     </>

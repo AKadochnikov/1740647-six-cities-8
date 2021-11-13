@@ -17,11 +17,7 @@ import ReviewsList from '../reviews-list/reviews-list';
 import Map from '../map/map';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
-
-
-type Params = {
-  id: string;
-}
+import {Params} from '../../types/types';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchPropertyData(id: number) {

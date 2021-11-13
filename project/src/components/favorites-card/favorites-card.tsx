@@ -1,15 +1,16 @@
 import {Link} from 'react-router-dom';
-import {Offer} from '../../types/types';
+import {Offer, Offers} from '../../types/types';
 import Card from '../card/card';
 
 
 type favoriteCardProps = {
   offerItem: Offer;
   isFavorites: boolean;
+  offers: Offers;
 }
 
 function FavoritesCard(props: favoriteCardProps): JSX.Element {
-  const {offerItem, isFavorites} = props;
+  const {offerItem, isFavorites, offers} = props;
   const {previewImage, id} = offerItem;
 
   return (
@@ -19,7 +20,7 @@ function FavoritesCard(props: favoriteCardProps): JSX.Element {
           <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
         </Link>
       </div>
-      <Card offer={offerItem} isFavorites={isFavorites}/>
+      <Card offer={offerItem} isFavorites={isFavorites} offers={offers}/>
     </article>
   );
 }
