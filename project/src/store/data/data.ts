@@ -66,8 +66,30 @@ const data = (state: Data = initialState, action: Actions) : Data => {
       return {...state, comments: comments};
     }
 
-    case ActionType.ResetIsFavoritesDataLoaded: {
-      return {...state, isFavoriteDataLoaded: false};
+    case ActionType.ResetIsFavoritesData: {
+      return {...state,
+        favoriteOffers: [],
+        isFavoriteDataLoaded: false};
+    }
+
+    case ActionType.UpdateOffers: {
+      const {offers} = action.payload;
+      return {...state, offers: offers};
+    }
+
+    case ActionType.UpdateNearbyOffers: {
+      const {nearbyOffers} = action.payload;
+      return {...state, nearbyOffers: nearbyOffers};
+    }
+
+    case ActionType.UpdateActiveOffer: {
+      const {activeOffer} = action.payload;
+      return {...state, activeOffer: activeOffer};
+    }
+
+    case ActionType.UpdateFavoriteOffers: {
+      const {favoriteOffers} = action.payload;
+      return {...state, favoriteOffers: favoriteOffers};
     }
 
     default:

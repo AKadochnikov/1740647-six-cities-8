@@ -1,12 +1,12 @@
 import {Offers} from '../../types/types';
 import {State} from '../../types/state';
-import {getSortedOffers} from '../../store/data/selectors';
+import {getOffers} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {connect, ConnectedProps} from 'react-redux';
 import {ThunkAppDispatch} from '../../types/action';
 import {postFavoriteAction} from '../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {Redirect, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 type FavoriteButtonProps = {
   isFavorite: boolean;
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
 });
 
 const mapStateToProps = (state: State) => ({
-  baseOffers: getSortedOffers(state),
+  baseOffers: getOffers(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 
@@ -44,8 +44,7 @@ function FavoriteButton (props: ConnectedComponentProps): JSX.Element {
   };
 
   return (
-    <button onClick={() => onClickHandler()}
-      className={`place-card__bookmark-button ${isFavorite? 'place-card__bookmark-button--active': ''} button`} type="button">
+    <button onClick={() => onClickHandler()} className={`place-card__bookmark-button ${isFavorite? 'place-card__bookmark-button--active': ''} button`} type="button">
       <svg className="place-card__bookmark-icon" width={18} height={19}>
         <use xlinkHref="#icon-bookmark" />
       </svg>

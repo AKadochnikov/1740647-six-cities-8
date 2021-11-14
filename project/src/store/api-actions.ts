@@ -4,10 +4,16 @@ import {
   loadOffers,
   requireAuthorization,
   requireLogout,
-  loadPropertyData, resetPropertyData, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded
+  loadPropertyData,
+  resetPropertyData,
+  refreshComments,
+  loadFavoriteOffers,
+  updateFavoriteOffers,
+  updateNearOffers,
+  updateActiveOffer, updateOffers
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
-import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category} from '../const';
+import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category, DELETE_COUNT} from '../const';
 import {Offers, OfferFromServer, PostComment, Comments, Offer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
@@ -73,21 +79,32 @@ export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActi
 export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers, baseOffers: Offers, category: string): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const newOffer = await api.post(`/favorite/${id}/${favoriteStatus}`).then((response): Offer => adaptOfferToClient(response.data));
+    let currentIndex = 0;
+    currentIndex = baseOffers.findIndex((item) => item.id === id);
+    let newOffers = baseOffers.slice();
+    newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
+    dispatch(updateOffers(newOffers));
     switch (category) {
       case Category.Favorites: {
-        console.log('FAVORITES');
+        currentIndex = offers.findIndex((item) => item.id === id);
+        newOffers = offers.slice();
+        newOffers.splice(currentIndex, DELETE_COUNT);
+        dispatch(updateFavoriteOffers(newOffers));
         break;
       }
       case Category.Nearby: {
-        console.log(Category.Nearby);
+        currentIndex = offers.findIndex((item) => item.id === id);
+        newOffers = offers.slice();
+        newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
+        dispatch(updateNearOffers(newOffers));
         break;
       }
       case Category.Room: {
-        console.log(Category.Room);
+        dispatch(updateActiveOffer(newOffer));
         break;
       }
       default: {
-        console.log('default');
+        break;
       }
     }
   };
