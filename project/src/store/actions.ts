@@ -72,4 +72,10 @@ const loadFavoriteOffers = (favoriteOffers: Offers) => ({
   },
 } as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments, loadFavoriteOffers};
+const resetIsFavoriteDataLoaded = () => ({
+  type: ActionType.ResetIsFavoritesDataLoaded,
+} as const);
+
+export {changeCity, changeOffers, loadOffers, requireAuthorization,
+  requireLogout, loadEmail, loadPropertyData, resetPropertyData,
+  changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded};

@@ -4,7 +4,7 @@ import {
   loadOffers,
   requireAuthorization,
   requireLogout,
-  loadPropertyData, resetPropertyData, refreshComments, loadFavoriteOffers
+  loadPropertyData, resetPropertyData, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category} from '../const';
@@ -92,9 +92,8 @@ export const postFavoriteAction = (id: number, favoriteStatus: number, offers: O
     }
   };
 
-export const fetchFavoritesData = (): ThunkActionResult =>
+export const fetchFavoritesDataAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    dispatch(resetPropertyData());
     const favoriteOffers = await api.get(APIRoute.Favorite).then((response): Offers => adaptOffersToClient(response.data));
     dispatch(loadFavoriteOffers(favoriteOffers));
   };

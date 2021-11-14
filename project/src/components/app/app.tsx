@@ -29,7 +29,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & AppProps;
 
 function App (props: ConnectedComponentProps): JSX.Element {
-  const {offers, isDataLoaded, authorizationStatus} = props;
+  const {isDataLoaded, authorizationStatus} = props;
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -52,9 +52,7 @@ function App (props: ConnectedComponentProps): JSX.Element {
           exact
           path={AppRoute.Favorites}
           render={() => (
-            <Favorites
-              offers={offers}
-            />)}
+            <Favorites/>)}
         >
         </PrivateRoute>
 

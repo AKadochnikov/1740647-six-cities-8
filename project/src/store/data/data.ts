@@ -30,7 +30,7 @@ const data = (state: Data = initialState, action: Actions) : Data => {
       const {favoriteOffers} = action.payload;
       return {...state,
         favoriteOffers: favoriteOffers,
-        isPropertyDataLoaded: true,
+        isFavoriteDataLoaded: true,
       };
     }
 
@@ -64,6 +64,10 @@ const data = (state: Data = initialState, action: Actions) : Data => {
     case ActionType.RefreshComments: {
       const {comments} = action.payload;
       return {...state, comments: comments};
+    }
+
+    case ActionType.ResetIsFavoritesDataLoaded: {
+      return {...state, isFavoriteDataLoaded: false};
     }
 
     default:
