@@ -7,16 +7,11 @@ import Login from '../login/login';
 import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
-import {Offers} from '../../types/types';
 import Loading from '../loading/loading';
 import {isCheckedAuth} from '../../utils';
 import {State} from '../../types/state';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {getIsDataLoading} from '../../store/data/selectors';
-
-type AppProps = {
-  offers: Offers;
-}
 
 const mapStateToProps = (state: State) => ({
   authorizationStatus: getAuthorizationStatus(state),
@@ -26,7 +21,7 @@ const mapStateToProps = (state: State) => ({
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & AppProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function App (props: ConnectedComponentProps): JSX.Element {
   const {isDataLoaded, authorizationStatus} = props;

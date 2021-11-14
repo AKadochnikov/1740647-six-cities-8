@@ -76,7 +76,7 @@ export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActi
     dispatch(refreshComments(comments));
   };
 
-export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers, baseOffers: Offers, category: string): ThunkActionResult =>
+export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers | null, baseOffers: Offers, category: string): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const newOffer = await api.post(`/favorite/${id}/${favoriteStatus}`).then((response): Offer => adaptOfferToClient(response.data));
     let currentIndex = 0;
@@ -84,8 +84,13 @@ export const postFavoriteAction = (id: number, favoriteStatus: number, offers: O
     let newOffers = baseOffers.slice();
     newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
     dispatch(updateOffers(newOffers));
+
+    if (offers === null) {
+      dispatch(updateActiveOffer(newOffer));
+      return;
+    }
     switch (category) {
-      case Category.Favorites: {
+      case (Category.Favorites):{
         currentIndex = offers.findIndex((item) => item.id === id);
         newOffers = offers.slice();
         newOffers.splice(currentIndex, DELETE_COUNT);
@@ -97,10 +102,6 @@ export const postFavoriteAction = (id: number, favoriteStatus: number, offers: O
         newOffers = offers.slice();
         newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
         dispatch(updateNearOffers(newOffers));
-        break;
-      }
-      case Category.Room: {
-        dispatch(updateActiveOffer(newOffer));
         break;
       }
       default: {

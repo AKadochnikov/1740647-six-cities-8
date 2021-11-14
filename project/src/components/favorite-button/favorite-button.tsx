@@ -5,18 +5,19 @@ import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {connect, ConnectedProps} from 'react-redux';
 import {ThunkAppDispatch} from '../../types/action';
 import {postFavoriteAction} from '../../store/api-actions';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus, Category} from '../../const';
 import {useHistory} from 'react-router-dom';
+import {PROPERTY_SIZE_BUTTON} from '../../const';
 
 type FavoriteButtonProps = {
   isFavorite: boolean;
   id: number;
-  offers: Offers;
+  offers: Offers | null;
   category: string;
 }
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  favoritesHandler(id: number, favoriteStatus: number, offers: Offers, baseOffers: Offers, category: string) {
+  favoritesHandler(id: number, favoriteStatus: number, offers: Offers | null, baseOffers: Offers, category: string) {
     dispatch(postFavoriteAction(id, favoriteStatus, offers, baseOffers, category));
   },
 });
@@ -43,9 +44,13 @@ function FavoriteButton (props: ConnectedComponentProps): JSX.Element {
     favoritesHandler(id, Number(!isFavorite), offers, baseOffers, category);
   };
 
+  const placeCard = `place-card__bookmark-button ${isFavorite? 'place-card__bookmark-button--active': ''} button`;
+  const propertyCard = `property__bookmark-button ${isFavorite? 'property__bookmark-button--active' : ''} button`;
+  const isRoom = category === Category.Room;
+
   return (
-    <button onClick={() => onClickHandler()} className={`place-card__bookmark-button ${isFavorite? 'place-card__bookmark-button--active': ''} button`} type="button">
-      <svg className="place-card__bookmark-icon" width={18} height={19}>
+    <button onClick={() => onClickHandler()} className={isRoom? propertyCard: placeCard} type="button">
+      <svg className={isRoom? 'property__bookmark-icon': 'place-card__bookmark-icon'} width={isRoom? PROPERTY_SIZE_BUTTON.width : 18} height={isRoom? PROPERTY_SIZE_BUTTON.height : 19}>
         <use xlinkHref="#icon-bookmark" />
       </svg>
       <span className="visually-hidden">In bookmarks</span>

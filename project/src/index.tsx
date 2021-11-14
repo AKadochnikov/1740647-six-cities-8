@@ -14,10 +14,6 @@ import {checkAuthAction, fetchHotelsAction} from './store/api-actions';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MainSetting = {
-  OFFERS: [],
-};
-
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
@@ -31,9 +27,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App
-        offers={MainSetting.OFFERS}
-      />
+      <App/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

@@ -1,6 +1,6 @@
 import {changeOffers, changeCity, loadOffers, requireAuthorization, requireLogout, loadEmail,
   loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded,
-  updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers,
+  updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers
 } from '../store/actions';
 import {ThunkAction, ThunkDispatch} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
