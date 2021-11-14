@@ -18,6 +18,7 @@ import Map from '../map/map';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
 import {Params} from '../../types/types';
+import {Category} from '../../const';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchPropertyData(id: number) {
@@ -161,7 +162,7 @@ function Property (props: PropsFromRedux): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesCardList offers={nearbyOffers} isFavorites={IS_FAVORITES.not}/>
+                <NearPlacesCardList offers={nearbyOffers} isFavorites={IS_FAVORITES.not} category={Category.Nearby}/>
               </div>
             </section>
           </div>

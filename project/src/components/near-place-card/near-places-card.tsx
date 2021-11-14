@@ -6,11 +6,12 @@ import Card from '../card/card';
 type nearPlacesCardProps = {
   offerItem: Offer;
   isFavorites: boolean;
-  offers: Offers
+  offers: Offers;
+  category: string;
 }
 
 function NearPlacesCard (props: nearPlacesCardProps): JSX.Element {
-  const {offerItem, isFavorites, offers} = props;
+  const {offerItem, isFavorites, offers, category} = props;
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function NearPlacesCard (props: nearPlacesCardProps): JSX.Element {
           <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
         </Link>
       </div>
-      <Card offer={offerItem} isFavorites={isFavorites} offers={offers}/>
+      <Card offer={offerItem} isFavorites={isFavorites} offers={offers} category={category}/>
     </article>
   );
 }

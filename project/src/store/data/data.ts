@@ -5,6 +5,8 @@ import {DEFAULT_CITY, SORT_BY} from '../../const';
 const initialState = {
   city: DEFAULT_CITY,
   offers: [],
+  favoriteOffers: [],
+  isFavoriteDataLoaded: false,
   isDataLoaded: false,
   activeOffer: null,
   comments: [],
@@ -21,6 +23,14 @@ const data = (state: Data = initialState, action: Actions) : Data => {
       return {...state,
         offers: offers,
         isDataLoaded: true,
+      };
+    }
+
+    case ActionType.LoadFavoriteOffers: {
+      const {favoriteOffers} = action.payload;
+      return {...state,
+        favoriteOffers: favoriteOffers,
+        isPropertyDataLoaded: true,
       };
     }
 

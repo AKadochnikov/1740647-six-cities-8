@@ -7,10 +7,11 @@ type favoriteCardProps = {
   offerItem: Offer;
   isFavorites: boolean;
   offers: Offers;
+  category: string;
 }
 
 function FavoritesCard(props: favoriteCardProps): JSX.Element {
-  const {offerItem, isFavorites, offers} = props;
+  const {offerItem, isFavorites, offers, category} = props;
   const {previewImage, id} = offerItem;
 
   return (
@@ -20,7 +21,7 @@ function FavoritesCard(props: favoriteCardProps): JSX.Element {
           <img className="place-card__image" src={previewImage} width={150} height={110} alt="Place image" />
         </Link>
       </div>
-      <Card offer={offerItem} isFavorites={isFavorites} offers={offers}/>
+      <Card offer={offerItem} isFavorites={isFavorites} offers={offers} category={category}/>
     </article>
   );
 }

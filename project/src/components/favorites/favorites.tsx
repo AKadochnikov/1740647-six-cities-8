@@ -5,11 +5,12 @@ import {AppRoute} from '../../const';
 import {Offers} from '../../types/types';
 import {IS_FAVORITES} from '../../const';
 
-type favoritesProps = {
+type FavoritesProps = {
   offers: Offers;
 }
 
-function Favorites({offers}: favoritesProps):JSX.Element {
+function Favorites(props: FavoritesProps):JSX.Element {
+  const {offers} = props;
   const Cities: Set<string> = new Set();
   offers.slice().filter((offerItem) => offerItem.isFavorite).forEach((offerItem) => Cities.add(offerItem.city.name));
   return (

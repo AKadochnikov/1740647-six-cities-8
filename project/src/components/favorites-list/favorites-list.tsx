@@ -2,6 +2,7 @@ import FavoritesCard from '../favorites-card/favorites-card';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {Offers} from '../../types/types';
+import {Category} from '../../const';
 
 type favoriteListProp = {
   city: string;
@@ -27,6 +28,7 @@ function FavoritesList(props: favoriteListProp):JSX.Element {
             key={offerItem.id}
             isFavorites={isFavorites}
             offers={offers}
+            category={Category.Favorites}
           />
         ))}
       </div>

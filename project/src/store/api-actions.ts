@@ -4,11 +4,11 @@ import {
   loadOffers,
   requireAuthorization,
   requireLogout,
-  loadPropertyData, resetPropertyData, refreshComments
+  loadPropertyData, resetPropertyData, refreshComments, loadFavoriteOffers
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
-import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
-import {Offers, OfferFromServer, PostComment, Comments} from '../types/types';
+import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category} from '../const';
+import {Offers, OfferFromServer, PostComment, Comments, Offer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
 import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
@@ -68,4 +68,33 @@ export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActi
   async (dispatch, _getState, api) => {
     const comments = await api.post(`${APIRoute.PostComment}${id}`, {comment, rating}).then((response): Comments => adaptCommentsToClient(response.data));
     dispatch(refreshComments(comments));
+  };
+
+export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers, baseOffers: Offers, category: string): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const newOffer = await api.post(`/favorite/${id}/${favoriteStatus}`).then((response): Offer => adaptOfferToClient(response.data));
+    switch (category) {
+      case Category.Favorites: {
+        console.log('FAVORITES');
+        break;
+      }
+      case Category.Nearby: {
+        console.log(Category.Nearby);
+        break;
+      }
+      case Category.Room: {
+        console.log(Category.Room);
+        break;
+      }
+      default: {
+        console.log('default');
+      }
+    }
+  };
+
+export const fetchFavoritesData = (): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    dispatch(resetPropertyData());
+    const favoriteOffers = await api.get(APIRoute.Favorite).then((response): Offers => adaptOffersToClient(response.data));
+    dispatch(loadFavoriteOffers(favoriteOffers));
   };

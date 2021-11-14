@@ -7,10 +7,11 @@ type CardProps ={
   offer: Offer;
   isFavorites: boolean;
   offers: Offers;
+  category: string;
 }
 
 function Card (props: CardProps):JSX.Element {
-  const {offer, isFavorites, offers} = props;
+  const {offer, isFavorites, offers, category} = props;
   const {price, rating, id, title, type, isFavorite} = offer;
   return (
     <div className={isFavorites? 'favorites__card-info place-card__info': 'place-card__info'}>
@@ -19,7 +20,7 @@ function Card (props: CardProps):JSX.Element {
           <b className="place-card__price-value">€{price}</b>
           <span className="place-card__price-text">/&nbsp;night</span>
         </div>
-        <FavoriteButton isFavorite={isFavorite} id={id} offers={offers}/>
+        <FavoriteButton isFavorite={isFavorite} id={id} offers={offers} category={category}/>
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">

@@ -65,4 +65,11 @@ const changeActiveSortBy = (sortItem: string) => ({
   },
 } as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments};
+const loadFavoriteOffers = (favoriteOffers: Offers) => ({
+  type: ActionType.LoadFavoriteOffers,
+  payload: {
+    favoriteOffers,
+  },
+} as const);
+
+export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments, loadFavoriteOffers};

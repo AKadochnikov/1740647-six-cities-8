@@ -7,6 +7,7 @@ const MARKER_DEFAULT = './img/pin.svg';
 const MARKER_CURRENT = './img/pin-active.svg';
 const AUTH_FAIL_MESSAGE = 'Please do not forget to log in';
 const COMMENTS_LIMIT = 10;
+const DELETE_COUNT = 1;
 
 const IS_FAVORITES = {
   not: false,
@@ -19,6 +20,13 @@ const SORT_BY = {
   HighToLow: 'Price: high to low',
   Top: 'Top rated first',
 };
+
+enum Category {
+  Favorites='favorites',
+  Room = 'room',
+  Nearby = 'nearby',
+  Main = 'main',
+}
 
 enum AppRoute {
   Main = '/',
@@ -38,7 +46,8 @@ enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  PostComment = '/comments/'
+  PostComment = '/comments/',
+  Favorite = '/favorite',
 }
 
 enum NameSpace {
@@ -109,5 +118,5 @@ const LOCATIONS = [
   },
 ];
 
-export {SORT_BY, AppRoute, AuthorizationStatus, APIRoute, NameSpace, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, IS_FAVORITES};
+export {SORT_BY, AppRoute, AuthorizationStatus, APIRoute, NameSpace, Category, DELETE_COUNT, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, IS_FAVORITES};
 
