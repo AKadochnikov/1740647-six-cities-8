@@ -1,17 +1,50 @@
 import Logo from '../logo/logo';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../favorites-list/favorites-list';
-import {AppRoute} from '../../const';
-import {Offers} from '../../types/types';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {IS_FAVORITES} from '../../const';
+import {ThunkAppDispatch} from '../../types/action';
+import {fetchFavoritesDataAction} from '../../store/api-actions';
+import {State} from '../../types/state';
+import {getFavoriteOffers, getIsFavoriteDataLoaded} from '../../store/data/selectors';
+import {connect, ConnectedProps} from 'react-redux';
+import Loading from '../loading/loading';
+import {useEffect} from 'react';
+import {resetIsFavoriteDataLoaded} from '../../store/actions';
+import Logged from '../logged/logged';
+import NotLogged from '../not-logged/not-logged';
+import {getAuthorizationStatus} from '../../store/authorization/selectors';
 
-type favoritesProps = {
-  offers: Offers;
-}
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  fetchFavoritesData() {
+    dispatch(resetIsFavoriteDataLoaded());
+    dispatch(fetchFavoritesDataAction());
+  },
+});
 
-function Favorites({offers}: favoritesProps):JSX.Element {
+const mapStateToProps = (state: State) => ({
+  favoriteOffers: getFavoriteOffers(state),
+  isFavoriteDataLoaded: getIsFavoriteDataLoaded(state),
+  authorizationStatus: getAuthorizationStatus(state),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function Favorites(props: PropsFromRedux):JSX.Element {
+  const {favoriteOffers, isFavoriteDataLoaded, fetchFavoritesData, authorizationStatus} = props;
+
+  useEffect(() => fetchFavoritesData(), [fetchFavoritesData]);
+
+  if (!isFavoriteDataLoaded) {
+    return (
+      <Loading/>
+    );
+  }
+
   const Cities: Set<string> = new Set();
-  offers.slice().filter((offerItem) => offerItem.isFavorite).forEach((offerItem) => Cities.add(offerItem.city.name));
+  favoriteOffers.forEach((offerItem) => Cities.add(offerItem.city.name));
   return (
     <div>
       <div style={{display: 'none'}}>
@@ -26,18 +59,7 @@ function Favorites({offers}: favoritesProps):JSX.Element {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </Link>
-                  </li>
-                  <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.Main}>
-                      <span className="header__signout">Sign out</span>
-                    </Link>
-                  </li>
+                  {authorizationStatus === AuthorizationStatus.Auth? <Logged/> : <NotLogged/>}
                 </ul>
               </nav>
             </div>
@@ -49,9 +71,8 @@ function Favorites({offers}: favoritesProps):JSX.Element {
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 {[...Cities].map((city) => (
-                  <FavoritesList key={`${city}_1`} city={city} offers={offers} isFavorites={IS_FAVORITES.yes}/>
+                  <FavoritesList key={`${city}_1`} city={city} offers={favoriteOffers} isFavorites={IS_FAVORITES.yes}/>
                 ))}
-
               </ul>
             </section>
           </div>
@@ -66,4 +87,4 @@ function Favorites({offers}: favoritesProps):JSX.Element {
   );
 }
 
-export default Favorites;
+export default connector(Favorites);

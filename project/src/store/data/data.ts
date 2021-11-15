@@ -5,6 +5,8 @@ import {DEFAULT_CITY, SORT_BY} from '../../const';
 const initialState = {
   city: DEFAULT_CITY,
   offers: [],
+  favoriteOffers: [],
+  isFavoriteDataLoaded: false,
   isDataLoaded: false,
   activeOffer: null,
   comments: [],
@@ -21,6 +23,14 @@ const data = (state: Data = initialState, action: Actions) : Data => {
       return {...state,
         offers: offers,
         isDataLoaded: true,
+      };
+    }
+
+    case ActionType.LoadFavoriteOffers: {
+      const {favoriteOffers} = action.payload;
+      return {...state,
+        favoriteOffers: favoriteOffers,
+        isFavoriteDataLoaded: true,
       };
     }
 
@@ -54,6 +64,32 @@ const data = (state: Data = initialState, action: Actions) : Data => {
     case ActionType.RefreshComments: {
       const {comments} = action.payload;
       return {...state, comments: comments};
+    }
+
+    case ActionType.ResetIsFavoritesData: {
+      return {...state,
+        favoriteOffers: [],
+        isFavoriteDataLoaded: false};
+    }
+
+    case ActionType.UpdateOffers: {
+      const {offers} = action.payload;
+      return {...state, offers: offers};
+    }
+
+    case ActionType.UpdateNearbyOffers: {
+      const {nearbyOffers} = action.payload;
+      return {...state, nearbyOffers: nearbyOffers};
+    }
+
+    case ActionType.UpdateActiveOffer: {
+      const {activeOffer} = action.payload;
+      return {...state, activeOffer: activeOffer};
+    }
+
+    case ActionType.UpdateFavoriteOffers: {
+      const {favoriteOffers} = action.payload;
+      return {...state, favoriteOffers: favoriteOffers};
     }
 
     default:

@@ -7,10 +7,11 @@ type CardListProps = {
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
   isFavorites: boolean;
+  category: string;
 }
 
 function CardList (props: CardListProps): JSX.Element {
-  const {offers, onMouseEnter, onMouseLeave, isFavorites} = props;
+  const {offers, onMouseEnter, onMouseLeave, isFavorites, category} = props;
   return (
     <>
       {offers.map((offerItem: Offer) => (
@@ -20,6 +21,8 @@ function CardList (props: CardListProps): JSX.Element {
           key={offerItem.id}
           offerItem={offerItem}
           isFavorites={isFavorites}
+          offers={offers}
+          category={category}
         />
       ))}
     </>

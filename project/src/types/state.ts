@@ -10,6 +10,8 @@ export type Authorization = {
 export type Data = {
   city: string,
   offers: Offers,
+  favoriteOffers: Offers,
+  isFavoriteDataLoaded: boolean,
   isDataLoaded: boolean,
   activeOffer: Offer | null,
   comments: Comments,

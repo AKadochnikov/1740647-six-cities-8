@@ -99,6 +99,10 @@ export type PostComment = {
   id: number,
 }
 
+export type Params = {
+  id: string;
+}
+
 export type Offers = Offer[];
 export type Comments = Comment[];
 export type SortBy = { [key: string]: string }

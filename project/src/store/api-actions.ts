@@ -4,11 +4,17 @@ import {
   loadOffers,
   requireAuthorization,
   requireLogout,
-  loadPropertyData, resetPropertyData, refreshComments
+  loadPropertyData,
+  resetPropertyData,
+  refreshComments,
+  loadFavoriteOffers,
+  updateFavoriteOffers,
+  updateNearOffers,
+  updateActiveOffer, updateOffers
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
-import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus} from '../const';
-import {Offers, OfferFromServer, PostComment, Comments} from '../types/types';
+import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category, DELETE_COUNT} from '../const';
+import {Offers, OfferFromServer, PostComment, Comments, Offer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
 import {adaptCommentsToClient, adaptOffersToClient, adaptOfferToClient} from '../utils';
@@ -68,4 +74,44 @@ export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActi
   async (dispatch, _getState, api) => {
     const comments = await api.post(`${APIRoute.PostComment}${id}`, {comment, rating}).then((response): Comments => adaptCommentsToClient(response.data));
     dispatch(refreshComments(comments));
+  };
+
+export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers | null, baseOffers: Offers, category: string): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const newOffer = await api.post(`/favorite/${id}/${favoriteStatus}`).then((response): Offer => adaptOfferToClient(response.data));
+    let currentIndex = 0;
+    currentIndex = baseOffers.findIndex((item) => item.id === id);
+    let newOffers = baseOffers.slice();
+    newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
+    dispatch(updateOffers(newOffers));
+
+    if (offers === null) {
+      dispatch(updateActiveOffer(newOffer));
+      return;
+    }
+    switch (category) {
+      case (Category.Favorites):{
+        currentIndex = offers.findIndex((item) => item.id === id);
+        newOffers = offers.slice();
+        newOffers.splice(currentIndex, DELETE_COUNT);
+        dispatch(updateFavoriteOffers(newOffers));
+        break;
+      }
+      case Category.Nearby: {
+        currentIndex = offers.findIndex((item) => item.id === id);
+        newOffers = offers.slice();
+        newOffers.splice(currentIndex, DELETE_COUNT, newOffer);
+        dispatch(updateNearOffers(newOffers));
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
+export const fetchFavoritesDataAction = (): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const favoriteOffers = await api.get(APIRoute.Favorite).then((response): Offers => adaptOffersToClient(response.data));
+    dispatch(loadFavoriteOffers(favoriteOffers));
   };

@@ -12,6 +12,8 @@ export const getComments = (state: State): Comments=> state[NameSpace.data].comm
 export const getNearbyOffers = (state: State): Offers => state[NameSpace.data].nearbyOffers;
 export const getIsPropertyDataLoaded = (state: State): boolean => state[NameSpace.data].isPropertyDataLoaded;
 export const getActiveSortBy = (state: State): string => state[NameSpace.data].activeSortBy;
+export const getIsFavoriteDataLoaded = (state: State): boolean => state[NameSpace.data].isFavoriteDataLoaded;
+export const getFavoriteOffers = (state: State): Offers => state[NameSpace.data].favoriteOffers;
 
 export const getSortedComments = createSelector(
   [getComments],

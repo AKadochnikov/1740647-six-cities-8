@@ -12,6 +12,7 @@ import {getActiveSortBy, getCity, getSortedOffers} from '../../store/data/select
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import SortList from '../sort-list/sort-list';
 import {useState} from 'react';
+import {Category} from '../../const';
 
 const mapStateToProps = (state: State) => ({
   city: getCity(state),
@@ -100,6 +101,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                       onMouseLeave={handleOfferMouseLeave}
                       offers={filteredOffers}
                       isFavorites={IS_FAVORITES.not}
+                      category={Category.Main}
                     />
                   </div>
                 </section> :

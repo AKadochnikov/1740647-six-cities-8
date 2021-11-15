@@ -17,11 +17,9 @@ import ReviewsList from '../reviews-list/reviews-list';
 import Map from '../map/map';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
-
-
-type Params = {
-  id: string;
-}
+import {Params} from '../../types/types';
+import {Category} from '../../const';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchPropertyData(id: number) {
@@ -99,12 +97,7 @@ function Property (props: PropsFromRedux): JSX.Element {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className={isFavorite ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button'} type="button">
-                    <svg className="property__bookmark-icon" width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <FavoriteButton isFavorite={isFavorite} id={currentId} offers={null} category={Category.Room}/>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -165,7 +158,7 @@ function Property (props: PropsFromRedux): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesCardList offers={nearbyOffers} isFavorites={IS_FAVORITES.not}/>
+                <NearPlacesCardList offers={nearbyOffers} isFavorites={IS_FAVORITES.not} category={Category.Nearby}/>
               </div>
             </section>
           </div>

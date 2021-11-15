@@ -65,4 +65,45 @@ const changeActiveSortBy = (sortItem: string) => ({
   },
 } as const);
 
-export {changeCity, changeOffers, loadOffers, requireAuthorization, requireLogout, loadEmail, loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments};
+const loadFavoriteOffers = (favoriteOffers: Offers) => ({
+  type: ActionType.LoadFavoriteOffers,
+  payload: {
+    favoriteOffers,
+  },
+} as const);
+
+const resetIsFavoriteDataLoaded = () => ({
+  type: ActionType.ResetIsFavoritesData,
+} as const);
+
+const updateOffers = (offers: Offers) => ({
+  type: ActionType.UpdateOffers,
+  payload: {
+    offers,
+  },
+} as const);
+
+const updateNearOffers = (nearbyOffers: Offers) => ({
+  type: ActionType.UpdateNearbyOffers,
+  payload: {
+    nearbyOffers,
+  },
+} as const);
+
+const updateActiveOffer = (activeOffer: Offer) => ({
+  type: ActionType.UpdateActiveOffer,
+  payload: {
+    activeOffer,
+  },
+} as const);
+
+const updateFavoriteOffers = (favoriteOffers: Offers) => ({
+  type: ActionType.UpdateFavoriteOffers,
+  payload: {
+    favoriteOffers,
+  },
+} as const);
+
+export {changeCity, changeOffers, loadOffers, requireAuthorization,
+  requireLogout, loadEmail, loadPropertyData, resetPropertyData,
+  changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded, updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers};
