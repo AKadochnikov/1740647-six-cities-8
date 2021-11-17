@@ -1,6 +1,6 @@
 import {changeOffers, changeCity, loadOffers, requireAuthorization, requireLogout, loadEmail,
   loadPropertyData, resetPropertyData, changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded,
-  updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers
+  updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers, updatePostCommentStatus
 } from '../store/actions';
 import {ThunkAction, ThunkDispatch} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
@@ -23,6 +23,7 @@ export enum ActionType {
   UpdateNearbyOffers = 'user/updateNearOffers',
   UpdateFavoriteOffers = 'user/updateFavoriteOffers',
   UpdateActiveOffer = 'user/updatePropertyOffer',
+  SetPostCommentStatus = 'user/setPostCommentStatus'
 }
 
 export type Actions =
@@ -41,7 +42,8 @@ export type Actions =
   | ReturnType<typeof updateOffers>
   | ReturnType<typeof updateNearOffers>
   | ReturnType<typeof updateActiveOffer>
-  | ReturnType<typeof updateFavoriteOffers>;
+  | ReturnType<typeof updateFavoriteOffers>
+  | ReturnType<typeof updatePostCommentStatus>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 

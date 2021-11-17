@@ -14,6 +14,7 @@ export const getIsPropertyDataLoaded = (state: State): boolean => state[NameSpac
 export const getActiveSortBy = (state: State): string => state[NameSpace.data].activeSortBy;
 export const getIsFavoriteDataLoaded = (state: State): boolean => state[NameSpace.data].isFavoriteDataLoaded;
 export const getFavoriteOffers = (state: State): Offers => state[NameSpace.data].favoriteOffers;
+export const getCommentStatus = (state: State): string => state[NameSpace.data].commentStatus;
 
 export const getSortedComments = createSelector(
   [getComments],

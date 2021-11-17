@@ -49,7 +49,7 @@ function FavoriteButton (props: ConnectedComponentProps): JSX.Element {
   const isRoom = category === Category.Room;
 
   return (
-    <button onClick={() => onClickHandler()} className={isRoom? propertyCard: placeCard} type="button">
+    <button onClick={onClickHandler} className={isRoom? propertyCard: placeCard} type="button">
       <svg className={isRoom? 'property__bookmark-icon': 'place-card__bookmark-icon'} width={isRoom? PROPERTY_SIZE_BUTTON.width : 18} height={isRoom? PROPERTY_SIZE_BUTTON.height : 19}>
         <use xlinkHref="#icon-bookmark" />
       </svg>

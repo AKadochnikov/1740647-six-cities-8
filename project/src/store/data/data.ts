@@ -1,6 +1,6 @@
 import {Data} from '../../types/state';
 import {Actions, ActionType} from '../../types/action';
-import {DEFAULT_CITY, SORT_BY} from '../../const';
+import {DEFAULT_CITY, SORT_BY, PostCommentStatus} from '../../const';
 
 const initialState = {
   city: DEFAULT_CITY,
@@ -13,6 +13,7 @@ const initialState = {
   nearbyOffers: [],
   isPropertyDataLoaded: false,
   activeSortBy: SORT_BY.Popular,
+  commentStatus: PostCommentStatus.Ready,
 };
 
 const data = (state: Data = initialState, action: Actions) : Data => {
@@ -63,7 +64,10 @@ const data = (state: Data = initialState, action: Actions) : Data => {
 
     case ActionType.RefreshComments: {
       const {comments} = action.payload;
-      return {...state, comments: comments};
+      return {...state,
+        comments: comments,
+        commentStatus: PostCommentStatus.Success,
+      };
     }
 
     case ActionType.ResetIsFavoritesData: {
@@ -90,6 +94,11 @@ const data = (state: Data = initialState, action: Actions) : Data => {
     case ActionType.UpdateFavoriteOffers: {
       const {favoriteOffers} = action.payload;
       return {...state, favoriteOffers: favoriteOffers};
+    }
+
+    case ActionType.SetPostCommentStatus: {
+      const {message} = action.payload;
+      return {...state, commentStatus: message};
     }
 
     default:

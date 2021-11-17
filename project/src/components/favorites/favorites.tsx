@@ -14,7 +14,7 @@ import {resetIsFavoriteDataLoaded} from '../../store/actions';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
-import FavoritesEmpty from "../favorites-empty/favorites-empty";
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchFavoritesData() {

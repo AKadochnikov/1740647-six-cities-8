@@ -47,9 +47,10 @@ const loadPropertyData = (offer: Offer, comments: Comments, nearbyOffers: Offers
   },
 } as const);
 
-const refreshComments = (comments: Comments) => ({
+const refreshComments = (comments: Comments, message: string) => ({
   type: ActionType.RefreshComments,
   payload: {
+    message,
     comments,
   },
 } as const);
@@ -104,6 +105,13 @@ const updateFavoriteOffers = (favoriteOffers: Offers) => ({
   },
 } as const);
 
+const updatePostCommentStatus = (message: string) => ({
+  type: ActionType.SetPostCommentStatus,
+  payload: {
+    message,
+  },
+} as const);
+
 export {changeCity, changeOffers, loadOffers, requireAuthorization,
   requireLogout, loadEmail, loadPropertyData, resetPropertyData,
-  changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded, updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers};
+  changeActiveSortBy, refreshComments, loadFavoriteOffers, resetIsFavoriteDataLoaded, updateOffers, updateNearOffers, updateActiveOffer, updateFavoriteOffers, updatePostCommentStatus};

@@ -8,6 +8,7 @@ const MARKER_CURRENT = './img/pin-active.svg';
 const AUTH_FAIL_MESSAGE = 'Please do not forget to log in';
 const COMMENTS_LIMIT = 10;
 const DELETE_COUNT = 1;
+const POST_COMMENT_FAIL_MESSAGE = 'An error occured. Please resend your comment';
 const PROPERTY_SIZE_BUTTON = {
   width: 31,
   height: 33,
@@ -24,6 +25,12 @@ const SORT_BY = {
   HighToLow: 'Price: high to low',
   Top: 'Top rated first',
 };
+
+enum PostCommentStatus {
+  Ready = 'ready',
+  Posting = 'posting',
+  Success = 'Success',
+}
 
 enum Category {
   Favorites='favorites',
@@ -122,5 +129,5 @@ const LOCATIONS = [
   },
 ];
 
-export {SORT_BY, AppRoute, AuthorizationStatus, APIRoute, NameSpace, Category, PROPERTY_SIZE_BUTTON, DELETE_COUNT, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, IS_FAVORITES};
+export {SORT_BY, AppRoute, AuthorizationStatus, APIRoute, NameSpace, Category, PostCommentStatus, POST_COMMENT_FAIL_MESSAGE, PROPERTY_SIZE_BUTTON, DELETE_COUNT, MARKER_CURRENT, MARKER_DEFAULT, DEFAULT_CITY, CITIES, LOCATIONS, BACKEND_URL, REQUEST_TIME_OUT, AUTH_TOKEN_KEY_NAME, AUTH_FAIL_MESSAGE, COMMENTS_LIMIT, IS_FAVORITES};
 

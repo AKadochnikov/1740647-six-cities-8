@@ -10,10 +10,12 @@ import {
   loadFavoriteOffers,
   updateFavoriteOffers,
   updateNearOffers,
-  updateActiveOffer, updateOffers
+  updateActiveOffer,
+  updateOffers,
+  updatePostCommentStatus
 } from './actions';
 import {dropToken, saveToken} from '../services/token';
-import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category, DELETE_COUNT} from '../const';
+import {APIRoute, AUTH_FAIL_MESSAGE, AuthorizationStatus, Category, DELETE_COUNT, POST_COMMENT_FAIL_MESSAGE, PostCommentStatus} from '../const';
 import {Offers, OfferFromServer, PostComment, Comments, Offer} from '../types/types';
 import {AuthData} from '../types/auth-data';
 import {Token} from '../types/api';
@@ -72,8 +74,15 @@ export const fetchPropertyDataAction = (id: number): ThunkActionResult =>
 
 export const postCommentAction = ({comment, rating, id}: PostComment): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    const comments = await api.post(`${APIRoute.PostComment}${id}`, {comment, rating}).then((response): Comments => adaptCommentsToClient(response.data));
-    dispatch(refreshComments(comments));
+    await api.post(`${APIRoute.PostComment}${id}`, {comment, rating})
+      .then((response) => {
+        const comments: Comments = adaptCommentsToClient(response.data);
+        dispatch(refreshComments(comments, PostCommentStatus.Success));
+      })
+      .catch(() => {
+        dispatch(updatePostCommentStatus(PostCommentStatus.Ready));
+        toast.info(POST_COMMENT_FAIL_MESSAGE);
+      });
   };
 
 export const postFavoriteAction = (id: number, favoriteStatus: number, offers: Offers | null, baseOffers: Offers, category: string): ThunkActionResult =>
