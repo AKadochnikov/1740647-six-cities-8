@@ -20,6 +20,7 @@ import NotLogged from '../not-logged/not-logged';
 import {Params} from '../../types/types';
 import {Category} from '../../const';
 import FavoriteButton from '../favorite-button/favorite-button';
+import {MAX_IMAGES} from '../../const';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchPropertyData(id: number) {
@@ -59,7 +60,7 @@ function Property (props: PropsFromRedux): JSX.Element {
 
   const {images, isPremium, title, bedrooms, rating, isFavorite, type, maxAdults, price, goods, host, description} = activeOffer;
   const offersToMap = [...nearbyOffers, activeOffer];
-  images.splice(6);
+  images.splice(MAX_IMAGES);
 
   return (
     <div>
