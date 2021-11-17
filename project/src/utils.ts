@@ -7,7 +7,7 @@ const ucFirst = (str: string): string => {
   }
   return str[0].toUpperCase() + str.slice(1);
 };
-const getRating = (rating: number): number => (rating * 10) * 2;
+const getRating = (rating: number): number => (Math.round(rating) * 10) * 2;
 
 const getFilteredOffers = (currentCity: string, offers: Offers) => offers.slice().filter((offerItem) => offerItem.city.name === currentCity);
 
