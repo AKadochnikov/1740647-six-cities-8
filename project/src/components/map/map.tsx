@@ -65,7 +65,7 @@ function Map (props: ConnectedComponentProps):JSX.Element {
     }
   }, [map, offers, activeOffer, city]);
 
-  return <div style={{height: '100%'}} ref={mapRef}/>;
+  return <div style={{height: '100%', marginLeft: 'auto', marginRight: 'auto', maxWidth: '1144px'}} ref={mapRef}/>;
 }
 
 export default connector(Map);
