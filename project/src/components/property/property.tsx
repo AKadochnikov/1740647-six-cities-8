@@ -59,6 +59,7 @@ function Property (props: PropsFromRedux): JSX.Element {
 
   const {images, isPremium, title, bedrooms, rating, isFavorite, type, maxAdults, price, goods, host, description} = activeOffer;
   const offersToMap = [...nearbyOffers, activeOffer];
+  images.splice(6);
 
   return (
     <div>
