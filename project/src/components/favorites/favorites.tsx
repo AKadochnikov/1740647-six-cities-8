@@ -14,6 +14,7 @@ import {resetIsFavoriteDataLoaded} from '../../store/actions';
 import Logged from '../logged/logged';
 import NotLogged from '../not-logged/not-logged';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   fetchFavoritesData() {
@@ -65,18 +66,21 @@ function Favorites(props: PropsFromRedux):JSX.Element {
             </div>
           </div>
         </header>
-        <main className="page__main page__main--favorites">
-          <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                {[...Cities].map((city) => (
-                  <FavoritesList key={`${city}_1`} city={city} offers={favoriteOffers} isFavorites={IS_FAVORITES.yes}/>
-                ))}
-              </ul>
-            </section>
-          </div>
-        </main>
+        {favoriteOffers.length > 0?
+          <main className="page__main page__main--favorites">
+            <div className="page__favorites-container container">
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {[...Cities].map((city) => (
+                    <FavoritesList key={`${city}_1`} city={city} offers={favoriteOffers} isFavorites={IS_FAVORITES.yes}/>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </main>
+          :
+          <FavoritesEmpty/>}
         <footer className="footer container">
           <Link className="footer__logo-link" to={AppRoute.Main}>
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
