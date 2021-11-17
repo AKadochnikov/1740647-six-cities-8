@@ -1,6 +1,7 @@
 import {CSSProperties} from 'react';
 
 const loadingContainer: CSSProperties = {
+  background: 'content-box radial-gradient(skyblue, white)',
   position: 'relative',
   height: '100vh',
 };
@@ -22,7 +23,7 @@ function Loading(): JSX.Element {
   return (
     <div style={loadingContainer}>
       <div style={loadingItem}>
-        <h1>Loading ...</h1>
+        <img src="img/puff.svg" alt="Loading..."/>
       </div>
     </div>
   );
