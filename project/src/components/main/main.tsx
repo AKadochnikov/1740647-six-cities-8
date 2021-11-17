@@ -114,7 +114,7 @@ function Main (props: ConnectedComponentProps): JSX.Element {
                 </section>}
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map activeOffer={activeOfferId} offers={filteredOffers}/>
+                  {filteredOffers.length > 0? <Map activeOffer={activeOfferId} offers={filteredOffers}/>: ''};
                 </section>
               </div>
             </div>
