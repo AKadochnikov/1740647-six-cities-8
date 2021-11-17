@@ -5,6 +5,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import {PostComment} from '../../types/types';
 
 const MIN_CHARACTERS = 50;
+const MAX_CHARACTERS = 300;
 
 type FormReviewProps = {
   id: number;
@@ -49,7 +50,7 @@ function FormReview(props: ConnectedComponentProps):JSX.Element {
     formRef.current?.reset();
   };
 
-  const isDisabled = comment.length < MIN_CHARACTERS || !rating;
+  const isDisabled = comment.length < MIN_CHARACTERS || !rating || comment.length > MAX_CHARACTERS;
 
   return (
     <form
