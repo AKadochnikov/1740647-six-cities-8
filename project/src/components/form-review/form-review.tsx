@@ -1,15 +1,12 @@
-import {useState, ChangeEvent, FormEvent, useRef, MouseEvent, useEffect} from 'react';
+import {ChangeEvent, FormEvent, MouseEvent, useEffect, useRef, useState} from 'react';
 import {ThunkAppDispatch} from '../../types/action';
 import {postCommentAction} from '../../store/api-actions';
 import {updatePostCommentStatus} from '../../store/actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {PostComment} from '../../types/types';
-import {PostCommentStatus} from '../../const';
+import {MAX_CHARACTERS, MIN_CHARACTERS, PostCommentStatus} from '../../const';
 import {State} from '../../types/state';
 import {getCommentStatus} from '../../store/data/selectors';
-
-const MIN_CHARACTERS = 50;
-const MAX_CHARACTERS = 300;
 
 type FormReviewProps = {
   id: number;
