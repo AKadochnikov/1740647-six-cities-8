@@ -79,5 +79,15 @@ const getSortValue = (sortItems: SortBy): string[] => {
   return result;
 };
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue};
+const checkPasswordValidation = (value: string, item: HTMLInputElement) => {
+  const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
+  if (!regPassword.test(value)){
+    item?.setCustomValidity('Please enter a two-digit password, letter and number');
+  } else {
+    item?.setCustomValidity('');
+  }
+  item?.reportValidity();
+};
+
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue, checkPasswordValidation };
 

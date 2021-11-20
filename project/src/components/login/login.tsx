@@ -1,7 +1,7 @@
 import Logo from '../logo/logo';
 import {Link, Redirect} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {useRef, FormEvent} from 'react';
+import {useRef, FormEvent, ChangeEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
@@ -10,6 +10,7 @@ import {State} from '../../types/state';
 import {AuthorizationStatus} from '../../const';
 import {getCity} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
+import {checkPasswordValidation} from '../../utils';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -48,6 +49,10 @@ function Login(props: PropsFromRedux): JSX.Element {
     );
   }
 
+  const handlePasswordInput = (evt: ChangeEvent<HTMLInputElement>) => {
+    checkPasswordValidation(evt.target.value, evt.target);
+  };
+
   return (
     <div>
       <div style={{display: 'none'}}>
@@ -74,7 +79,7 @@ function Login(props: PropsFromRedux): JSX.Element {
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$" required />
+                  <input onInput={handlePasswordInput} ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required />
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
               </form>
