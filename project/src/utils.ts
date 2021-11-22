@@ -1,5 +1,5 @@
 import {City, Comment, CommentFromServer, Offer, OfferFromServer, Offers, SortBy} from './types/types';
-import {AuthorizationStatus, LOCATIONS} from './const';
+import {AuthorizationStatus, LOCATIONS, CITIES} from './const';
 
 const ucFirst = (str: string): string => {
   if (!str) {
@@ -89,5 +89,12 @@ const checkPasswordValidation = (value: string, item: HTMLInputElement) => {
   item?.reportValidity();
 };
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue, checkPasswordValidation };
+const getRandomInt = (min: number, max: number): number => Math.floor(Math.random() * (max - min)) + min;
+
+const getRandomCity = (): string => {
+  const cityIndex = getRandomInt(0, CITIES.length);
+  return CITIES[cityIndex];
+};
+
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue, checkPasswordValidation, getRandomCity};
 
