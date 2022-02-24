@@ -1,5 +1,5 @@
 const AUTH_TOKEN_KEY_NAME = 'user-token';
-const BACKEND_URL = 'https://9.react.pages.academy/wtw/six-cities';
+const BACKEND_URL = 'https://9.react.pages.academy/six-cities';
 const REQUEST_TIME_OUT = 5000;
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 const DEFAULT_CITY = 'Paris';
