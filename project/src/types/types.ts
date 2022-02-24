@@ -19,8 +19,8 @@ export type OfferFromServer = {
   host: {
     id: number;
     name: string;
-    'is_pro': boolean,
-    'avatar_url': string,
+    'isPro': boolean,
+    'avatarUrl': string,
   }
   id: number;
   images: string[];
@@ -33,10 +33,10 @@ export type OfferFromServer = {
   rating: number;
   title: string;
   type: string,
-  'preview_image': string,
-  'is_favorite': boolean,
-  'is_premium': boolean,
-  'max_adults': number,
+  'previewImage': string,
+  'isFavorite': boolean,
+  'isPremium': boolean,
+  'maxAdults': number,
 }
 
 export type Offer = {
@@ -73,9 +73,9 @@ export type CommentFromServer = {
   id: number,
   rating: number,
   user: {
-    'avatar_url': string,
+    'avatarUrl': string,
     id: number,
-    'is_pro': boolean,
+    'isPro': boolean,
     name: string,
   }
 }

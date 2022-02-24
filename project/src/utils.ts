@@ -22,22 +22,22 @@ const adaptOfferToClient = (offer: OfferFromServer): Offer => ({
   description: offer.description,
   goods: offer.goods,
   host: {
-    avatarUrl: offer.host.avatar_url,
+    avatarUrl: offer.host.avatarUrl,
     id: offer.host.id,
-    isPro: offer.host.is_pro,
+    isPro: offer.host.isPro,
     name: offer.host.name,
   },
   id: offer.id,
   images: offer.images,
-  isFavorite: offer.is_favorite,
-  isPremium: offer.is_premium,
+  isFavorite: offer.isFavorite,
+  isPremium: offer.isPremium,
   location: {
     latitude: offer.location.latitude,
     longitude: offer.location.longitude,
     zoom: offer.location.zoom,
   },
-  maxAdults: offer.max_adults,
-  previewImage: offer.preview_image,
+  maxAdults: offer.maxAdults,
+  previewImage: offer.previewImage,
   price: offer.price,
   rating: offer.rating,
   title: offer.title,
@@ -47,8 +47,8 @@ const adaptOfferToClient = (offer: OfferFromServer): Offer => ({
 const adaptOffersToClient = (offers: OfferFromServer[]) => offers.map((offer) => adaptOfferToClient(offer));
 
 const adaptCommentsToClient = (comments: CommentFromServer[]) => comments.map((commentItem): Comment => {
-  const isPro: boolean = commentItem.user['is_pro'];
-  const avatarUrl: string = commentItem.user['avatar_url'];
+  const isPro: boolean = commentItem.user['isPro'];
+  const avatarUrl: string = commentItem.user['avatarUrl'];
   const id: number = commentItem.user['id'];
   const name: string = commentItem.user['name'];
   return {
