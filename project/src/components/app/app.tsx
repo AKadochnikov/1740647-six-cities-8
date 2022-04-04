@@ -12,6 +12,7 @@ import {isCheckedAuth} from '../../utils';
 import {State} from '../../types/state';
 import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {getIsDataLoading} from '../../store/data/selectors';
+import {useEffect} from 'react';
 
 const mapStateToProps = (state: State) => ({
   authorizationStatus: getAuthorizationStatus(state),
@@ -26,11 +27,13 @@ type ConnectedComponentProps = PropsFromRedux;
 function App (props: ConnectedComponentProps): JSX.Element {
   const {isDataLoaded, authorizationStatus} = props;
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  useEffect(() => {
+    if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <Loading/>
     );
   }
+  }, [isDataLoaded]);
 
   return  (
     <BrowserRouter>
