@@ -1,5 +1,5 @@
-import {City, Comment, CommentFromServer, Offer, OfferFromServer, Offers, SortBy} from './types/types';
-import {AuthorizationStatus, LOCATIONS, CITIES} from './const';
+import {City, Comment, CommentFromServer, Comments, Offer, OfferFromServer, Offers, SortBy} from './types/types';
+import {LOCATIONS, CITIES} from './const';
 
 const ucFirst = (str: string): string => {
   if (!str) {
@@ -9,7 +9,7 @@ const ucFirst = (str: string): string => {
 };
 const getRating = (rating: number): number => (Math.round(rating) * 10) * 2;
 
-const getFilteredOffers = (currentCity: string, offers: Offers) => offers.slice().filter((offerItem) => offerItem.city.name === currentCity);
+const getFilteredOffers = (currentCity: string, offers: Offers): Offers => offers.slice().filter((offerItem) => offerItem.city.name === currentCity);
 
 const getLocation = (currentCity: string): City => {
   const newLocation = LOCATIONS.filter((currentLocation) => currentLocation.city.name === currentCity);
@@ -44,9 +44,9 @@ const adaptOfferToClient = (offer: OfferFromServer): Offer => ({
   type: offer.type,
 });
 
-const adaptOffersToClient = (offers: OfferFromServer[]) => offers.map((offer) => adaptOfferToClient(offer));
+const adaptOffersToClient = (offers: OfferFromServer[]): Offers => offers.map((offer) => adaptOfferToClient(offer));
 
-const adaptCommentsToClient = (comments: CommentFromServer[]) => comments.map((commentItem): Comment => {
+const adaptCommentsToClient = (comments: CommentFromServer[]): Comments => comments.map((commentItem): Comment => {
   const isPro: boolean = commentItem.user['isPro'];
   const avatarUrl: string = commentItem.user['avatarUrl'];
   const id: number = commentItem.user['id'];
@@ -66,9 +66,6 @@ const adaptCommentsToClient = (comments: CommentFromServer[]) => comments.map((c
 
 const humanizeDate = (date: Date): string => date.toLocaleDateString('en-Us', {month: 'long', year: 'numeric'});
 
-const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
-  authorizationStatus === AuthorizationStatus.Unknown;
-
 const getSortValue = (sortItems: SortBy): string[] => {
   const result: string[] = [];
   for (const newKey in sortItems) {
@@ -79,7 +76,7 @@ const getSortValue = (sortItems: SortBy): string[] => {
   return result;
 };
 
-const checkPasswordValidation = (value: string, item: HTMLInputElement) => {
+const checkPasswordValidation = (value: string, item: HTMLInputElement): void => {
   const regPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
   if (!regPassword.test(value)){
     item?.setCustomValidity('Please enter a two-digit password, letter and number');
@@ -96,5 +93,5 @@ const getRandomCity = (): string => {
   return CITIES[cityIndex];
 };
 
-export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, isCheckedAuth, adaptCommentsToClient, humanizeDate, getSortValue, checkPasswordValidation, getRandomCity};
+export {getRating, ucFirst, getFilteredOffers, getLocation, adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient, humanizeDate, getSortValue, checkPasswordValidation, getRandomCity};
 

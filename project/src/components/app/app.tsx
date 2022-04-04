@@ -8,14 +8,10 @@ import Property from '../property/property';
 import NotFound from '../404-not-found/404';
 import PrivateRoute from '../private-route/private-route';
 import Loading from '../loading/loading';
-import {isCheckedAuth} from '../../utils';
 import {State} from '../../types/state';
-import {getAuthorizationStatus} from '../../store/authorization/selectors';
 import {getIsDataLoading} from '../../store/data/selectors';
-import {useEffect} from 'react';
 
 const mapStateToProps = (state: State) => ({
-  authorizationStatus: getAuthorizationStatus(state),
   isDataLoaded: getIsDataLoading(state),
 });
 
@@ -25,43 +21,25 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function App (props: ConnectedComponentProps): JSX.Element {
-  const {isDataLoaded, authorizationStatus} = props;
-
-  useEffect(() => {
-    if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
-    return (
-      <Loading/>
-    );
-  }
-  }, [isDataLoaded]);
+  const {isDataLoaded} = props;
 
   return  (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <Main/>
+          {isDataLoaded? <Main/> :<Loading/> }
         </Route>
-
         <Route exact path={AppRoute.SignIn}>
           <Login />
         </Route>
-
-        <PrivateRoute
-          exact
-          path={AppRoute.Favorites}
-          render={() => (
-            <Favorites/>)}
-        >
+        <PrivateRoute exact path={AppRoute.Favorites} render={() => (<Favorites/>)}>
         </PrivateRoute>
-
         <Route exact path={AppRoute.Room}>
           <Property/>
         </Route>
-
-        <Route exact path={AppRoute.NotFound}>
+        <Route>
           <NotFound />
         </Route>
-
       </Switch>
     </BrowserRouter>
   );
