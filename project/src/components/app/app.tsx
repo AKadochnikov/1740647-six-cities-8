@@ -26,7 +26,7 @@ type ConnectedComponentProps = PropsFromRedux;
 function App (props: ConnectedComponentProps): JSX.Element {
   const {isDataLoaded, authorizationStatus} = props;
 
-  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <Loading/>
     );
